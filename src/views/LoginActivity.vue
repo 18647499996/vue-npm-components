@@ -1255,21 +1255,21 @@ export default {
     // })
     // this.utils.EventBusManagerUtils.post('liudonghan', '哈哈哈哈哈')
     // this.utils.EventBusManagerUtils.unregister('liudonghan')
-    // this.utils.LocationManagerUtils.getCurrentLocation(result => {
-    //   console.warn('精确定位：', result)
-    // })
-    // this.utils.LocationManagerUtils.getCurrentCityLocation(result => {
-    //   console.warn('IP定位：', result)
-    // })
-    // this.utils.LocationManagerUtils.getWeatherLive('北京市', result => {
-    //   console.warn('天气数据：', result)
-    // })
-    // this.utils.LocationManagerUtils.getWeatherForecast('北京市', result => {
-    //   console.warn('预报数据：', result)
-    // })
-    // this.utils.LocationManagerUtils.getPoiSearch({ keyword: '江城明珠', city: '武汉' }, result => {
-    //   console.warn('POI周边信息：',result)
-    // })
+    this.utils.LocationManagerUtils.getCurrentLocation(result => {
+      console.warn('精确定位：', result)
+    })
+    this.utils.LocationManagerUtils.getCurrentCityLocation(result => {
+      console.warn('IP定位：', result)
+    })
+    this.utils.LocationManagerUtils.getWeatherLive('北京市', result => {
+      console.warn('天气数据：', result)
+    })
+    this.utils.LocationManagerUtils.getWeatherForecast('北京市', result => {
+      console.warn('预报数据：', result)
+    })
+    this.utils.LocationManagerUtils.getPoiSearch({ keyword: '江城明珠', city: '武汉' }, result => {
+      console.warn('POI周边信息：',result)
+    })
     // this.utils.ChatMessageUtils.login('supplier_2103291574', 'eJwtjcsKwjAURP8l20hJYpMmBReNFl2oIBWkbqSQVK62kj4UH-jv1ra7mTPDzAft14n3sDUKEfMImvQejL21kEOPm7tzRSdPjJIpU5QH-lhrzDVzDgwKqU*IEL5kYkjs00FtO845Z4SQgbZQ-pmQARVCKTauwLl70TFm8wNtFE2zC34fF3pjEvvSttoCTvNit1xFsoxwJeMZ*v4Axzs0Rg__', data => {
     //   console.warn('IM登录：', data)
     // })

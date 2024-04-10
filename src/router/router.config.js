@@ -31,4 +31,13 @@ export const constantRouterMap = [
       keepAlive: false
     }
   },
+  {
+    path: '/MapActivity',
+    name: 'MapActivity',
+    component: () => import('@/views/MapActivity'),
+    meta: {
+      title: '地图',
+      keepAlive: false
+    }
+  },
 ]

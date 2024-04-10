@@ -36,9 +36,9 @@ export function loadMap(plugins) {
  */
 function getCurrentLocation(geocoderListener) {
   loadMap(['AMap.Geolocation'])
-    .then(function() {
+    .then(function () {
       new AMap.Geolocation(locationOption)
-        .getCurrentPosition(function(status, result) {
+        .getCurrentPosition(function (status, result) {
           if (result.status === 0 && result.info === 'SUCCESS') {
             getGeocoder('', result.position.lng, result.position.lat, geocoderListener)
           } else {
@@ -46,8 +46,8 @@ function getCurrentLocation(geocoderListener) {
           }
         })
     }).catch(error => {
-    console.error('get location error：', error)
-  })
+      console.error('get location error：', error)
+    })
 }
 
 /**
@@ -56,9 +56,9 @@ function getCurrentLocation(geocoderListener) {
  */
 function getCurrentCityLocation(currentCityLocationListener) {
   loadMap(['AMap.CitySearch'])
-    .then(function() {
+    .then(function () {
       const citySearch = new AMap.CitySearch()
-      citySearch.getLocalCity(function(status, result) {
+      citySearch.getLocalCity(function (status, result) {
         if (status === 'complete' && result.info === 'OK') {
           // 查询成功，result即为当前所在城市信息
           currentCityLocationListener(result)
@@ -77,11 +77,11 @@ function getCurrentCityLocation(currentCityLocationListener) {
 export function getGeocoder(city, lng, lat, geocoderListener) {
   const pos = [lng, lat]
   loadMap(['AMap.Geocoder'])
-    .then(function() {
+    .then(function () {
       new AMap.Geocoder({
         // city 指定进行编码查询的城市，支持传入城市名、adcode 和 citycode
         city: city
-      }).getAddress(pos, function(status, result) {
+      }).getAddress(pos, function (status, result) {
         if (result.info === 'OK') {
           geocoderListener(result)
         } else {
@@ -89,8 +89,8 @@ export function getGeocoder(city, lng, lat, geocoderListener) {
         }
       })
     }).catch(error => {
-    console.error('get geocoder info error ', error)
-  })
+      console.error('get geocoder info error ', error)
+    })
 }
 
 /**
@@ -101,11 +101,11 @@ export function getGeocoder(city, lng, lat, geocoderListener) {
 export function getWeatherLive(city, weatherLiveListener) {
   //加载天气查询插件
   loadMap(['AMap.Weather'])
-    .then(function() {
+    .then(function () {
       // 创建天气查询实例
       const weather = new AMap.Weather()
       // 执行实时天气信息查询
-      weather.getLive(city, function(err, data) {
+      weather.getLive(city, function (err, data) {
         weatherLiveListener(data)
       })
     })
@@ -118,11 +118,11 @@ export function getWeatherLive(city, weatherLiveListener) {
  */
 export function getWeatherForecast(city, weatherForecastListener) {
   loadMap(['AMap.Weather'])
-    .then(function() {
+    .then(function () {
       // 创建天气查询实例
       const weather = new AMap.Weather()
       //执行实时天气信息查询
-      weather.getForecast(city, function(err, data) {
+      weather.getForecast(city, function (err, data) {
         weatherForecastListener(data)
       })
     })
@@ -156,20 +156,74 @@ export function getWeatherForecast(city, weatherForecastListener) {
  */
 export function getPoiSearch(searchOption, searchListener) {
   loadMap(['AMap.PlaceSearch'])
-    .then(function() {
+    .then(function () {
       new AMap.PlaceSearch(searchOption)
-        .search(searchOption.keyword, function(status, result) {
+        .search(searchOption.keyword, function (status, result) {
           searchListener(result)
         })
     })
 }
 
-export function getMap() {
-  new AMap.Map('container')
+/**
+ * 路线规划
+ * @param {*} container 容器id
+ * @param {*} startLat  起始经度
+ * @param {*} startLng  起始维度
+ * @param {*} endLat 终点经度
+ * @param {*} endLng  终点维度
+ * @param {*} mapOption  地图Map属性
+ * @param {*} drivingOption 设置路线规划属性
+ * @param {*} waypoints 途经点
+ * @param {*} drivingSearchListener 路线结果回调
+ *                          
+ */
+export function getDrivingSearch(container, startLat, startLng, endLat, endLng, mapOption, drivingOption, waypoints, drivingSearchListener) {
+  loadMap(['AMap.Driving'])
+    .then(function () {
+      var map = getMap(container, mapOption);
+      // //构造路线导航类
+      var driving = new AMap.Driving({
+        // AMap.Map对象, 展现结果的地图实例。当指定此参数后，搜索结果的标注、线路等均会自动添加到此地图上。可选
+        map: map,
+        // 驾车路线规划策略 1.最快捷模式:AMap.DrivingPolicy.LEAST_TIME
+        //               2.最经济模式:AMap.DrivingPolicy.LEAST_FEE
+        //               3.最短距离模式:AMap.DrivingPolicy.LEAST_DISTANCE
+        //               4.考虑实时路况:AMap.DrivingPolicy.REAL_TRAFFIC
+        policy: drivingOption.policy,
+        // 默认值：base，返回基本地址信息 当取值为：all，返回DriveStep基本信息+DriveStep详细信息
+        extensions: drivingOption.extensions,
+        // 默认为0，表示可以使用轮渡，为1的时候表示不可以使用轮渡
+        ferry: drivingOption.ferry,
+        // 结果列表的HTML容器id或容器元素，提供此参数后，结果列表将在此容器中进行展示。可选
+        panel: drivingOption.panel,
+        // 设置隐藏路径规划的起始点图标，设置为true：隐藏图标；设置false：显示图标        默认值为：false
+        hideMarkers: drivingOption.hideMarkers,
+        // 设置是否显示实时路况信息，默认设置为true。显示绿色代表畅通，黄色代表轻微拥堵，红色代表比较拥堵，灰色表示无路况信息。
+        showTraffic: drivingOption.showTraffic,
+        // 车牌省份的汉字缩写，用于判断是否限行，与number属性组合使用，可选。例如：京
+        province: drivingOption.province,
+        // 除省份之外车牌的字母和数字，用于判断限行相关，与province属性组合使用，可选。例如:NH1N11
+        number: drivingOption.number,
+        // 使用map属性时，绘制的规划线路是否显示描边。缺省为true
+        isOutlineL: drivingOption.isOutline,
+        // 使用map属性时，绘制的规划线路的描边颜色。缺省为'white'
+        outlineColor: drivingOption.outlineColor,
+        // 用于控制在路径规划结束后，是否自动调整地图视野使绘制的路线处于视口的可见范围
+        autoFitView: drivingOption.autoFitView
+      });
+
+      // 根据起终点经纬度规划驾车导航路线
+      driving.search(new AMap.LngLat(startLng, startLat), new AMap.LngLat(endLng, endLat), {
+        // 途经点通过opts设定，最多支持16个途径点，new AMap.LngLat(116.379028, 39.885042)
+        waypoints: waypoints
+      }, function (status, result) {
+        drivingSearchListener(result, map)
+      });
+    })
 }
 
-export function getGDLocation() {
-  AMap.plugin('')
+export function getMap(container, option) {
+  return new AMap.Map(container, option);
 }
 
 export default {
@@ -178,5 +232,7 @@ export default {
   getCurrentLocation,
   getWeatherLive,
   getWeatherForecast,
-  getPoiSearch
+  getPoiSearch,
+  getDrivingSearch,
+  getMap
 }
