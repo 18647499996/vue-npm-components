@@ -213,12 +213,14 @@ export function getDrivingSearch(container, startLat, startLng, endLat, endLng, 
       });
 
       // 根据起终点经纬度规划驾车导航路线
-      driving.search(new AMap.LngLat(startLng, startLat), new AMap.LngLat(endLng, endLat), {
-        // 途经点通过opts设定，最多支持16个途径点，new AMap.LngLat(116.379028, 39.885042)
-        waypoints: waypoints
-      }, function (status, result) {
-        drivingSearchListener(result, map)
-      });
+      driving.search(new AMap.LngLat(startLng, startLat), new AMap.LngLat(endLng, endLat),
+        {
+          // 途经点通过opts设定，最多支持16个途径点，new AMap.LngLat(116.379028, 39.885042)
+          waypoints: waypoints
+        },
+        function (status, result) {
+          drivingSearchListener(result, map)
+        });
     })
 }
 
