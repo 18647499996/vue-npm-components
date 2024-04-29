@@ -20,7 +20,7 @@ const locationOption = {
  * @param plugins
  * @return {Promise<any>}
  */
-export function loadMap(plugins) {
+export function loadMap(plugins = []) {
   window._AMapSecurityConfig = {
     securityJsCode: ConstantManagerUtils.config.mapSecurityCode
   }
@@ -228,6 +228,21 @@ export function getMap(container, option) {
   return new AMap.Map(container, option);
 }
 
+export function addMap(container, option, mapListener) {
+  loadMap()
+    .then(succeed => {
+      var map = getMap(container, option);
+      var marker = new AMap.Marker({
+        map: map,
+        icon: "//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-red.png",
+        position: option.center,
+        offset: new AMap.Pixel(-13, -30)
+      });
+      map.add(marker);
+      mapListener(map);
+    })
+}
+
 export default {
   locationOption,
   getCurrentCityLocation,
@@ -236,5 +251,5 @@ export default {
   getWeatherForecast,
   getPoiSearch,
   getDrivingSearch,
-  getMap
+  addMap
 }

@@ -40,4 +40,13 @@ export const constantRouterMap = [
       keepAlive: false
     }
   },
+  {
+    path: '/SignActivity',
+    name: 'SignActivity',
+    component: () => import('@/views/SignActivity'),
+    mate: {
+      title: '签名',
+      keepAlive: false
+    }
+  }
 ]
