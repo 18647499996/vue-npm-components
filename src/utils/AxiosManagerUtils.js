@@ -148,12 +148,12 @@ export function addParamsInterceptors(paramsListener) {
 /**
  * todo codeStatus拦截器
  */
-export function addCodeInterceptors(codeStatusListener) {
+export function addCodeInterceptors(codeStatusListener,errorStatusListener) {
   axiosManager.interceptors.response.use(config => {
     return codeStatusListener(config)
   }, error => {
     console.error('请求异常：', error)
-    return Promise.reject(error)
+    return errorStatusListener(error)
   })
   return this
 }
