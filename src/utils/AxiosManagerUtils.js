@@ -152,8 +152,8 @@ export function addCodeInterceptors(codeStatusListener) {
   axiosManager.interceptors.response.use(config => {
     return codeStatusListener(config)
   }, error => {
-    console.error('请求异常：', error.response)
-    return codeStatusListener(error.response)
+    console.error('请求异常：', error)
+    return Promise.reject(error)
   })
   return this
 }
@@ -229,7 +229,7 @@ export function form(url, data) {
  */
 export function merger(mergerRequest, onSucceed, onError) {
   axiosServer.all(mergerRequest)
-    .then(axiosServer.spread(function(...data) {
+    .then(axiosServer.spread(function (...data) {
       onSucceed(data)
     }))
     .catch(error => {

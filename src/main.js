@@ -15,6 +15,7 @@ import utils from '@/utils'
 
 Vue.prototype.$cdn = $cdn
 Vue.prototype.utils = utils
+Vue.prototype.$dict = window.dict
 Vue.config.productionTip = false
 Vue.prototype.utils.ConstantManagerUtils.config.mapSecurityCode = '7713f4ba19ee015c27a7a23bd34bf1b8'
 Vue.prototype.utils.ConstantManagerUtils.config.mapKey = '639d4746cedd0f218a1ce498f10d9559'
