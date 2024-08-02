@@ -87,7 +87,6 @@
 
 import api from '@/api/BaseApi'
 import cryptoJs from 'crypto-js'
-import echarts from 'echarts'
 
 export default {
   components: {
