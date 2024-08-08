@@ -29,7 +29,9 @@ const config = {
   // 文件下载回调方法
   onDownloadProgress: null,
   // 文件上传回调方法
-  onUploadProgress: null
+  onUploadProgress: null,
+  // 请求体转换器
+  transformRequest: []
 }
 
 let axiosManager
@@ -106,6 +108,20 @@ export function uploadProgressListener(listener) {
     succeed.progress = progress
     listener(succeed)
   })
+  return this
+}
+
+/**
+ * todo 请求体数据转换（ 注：该方法执行在拦截器前面 ）
+ * @param {*} listener 
+ * @returns 
+ */
+export function transformRequestData(transformRequestDataListener) {
+  axiosManager.defaults.transformRequest = [
+    function (data, header) {
+      return transformRequestDataListener(data, header)
+    }
+  ]
   return this
 }
 
@@ -343,6 +359,7 @@ export default {
   download,
   downloadProgressListener,
   uploadProgressListener,
+  transformRequestData,
   xls,
   video,
   transformSchedulers,

@@ -1224,7 +1224,8 @@ export default {
           name: 'b',
           tableList: []
         }
-      ]
+      ],
+      params: { "largeRegionId": 57857, "provinceRegionId": 7, "dealerId": 16, "orderStartTime": "2024-04-02 00:00:00", "orderEndTime": "2024-04-30 23:59:59", "pageNum": null, "pageSize": null, "token": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicGFzc3dvcmQiOiJWbFZGTFVGT1ZFUXRVRkpQZFhaek5XSkZjVzFHTld4QVJsSlBUbFJGVGtRPSIsImlzUmVtZW1iZXIiOm51bGwsInVzZXJOYW1lIjoiYWRtaW4iLCJleHAiOjE3MjI5OTc0NDksInVzZXJJZCI6MSwiaWF0IjoxNzIyOTk3NDQ1LCJqdGkiOiI3N2JkOTdjZi1lMmUxLTRhMmYtYWEzOS1jOGE0ZTliM2U2N2QifQ.cAdWnXaWo9Xz9Y3tgAGlFJEMTVokFlRjRSVWTKlDYq4", "ts": "1722997482880", "nonce": "0htoc9ovu5gw0", "exportColumn": [{ "title": "大区", "dataIndex": "largeRegionName", "align": "center", "width": 200, "exportWidth": 10, "ellipsis": true }, { "title": "省区", "dataIndex": "provinceRegionName", "align": "center", "width": 200, "exportWidth": 12, "ellipsis": true }, { "title": "经销商", "dataIndex": "dealerName", "align": "center", "width": 200, "exportWidth": 20, "ellipsis": true }, { "title": "分部", "dataIndex": "divisionName", "align": "center", "width": 200, "exportWidth": 20, "ellipsis": true }, { "title": "学校", "dataIndex": "schoolName", "align": "center", "width": 200, "exportWidth": 40, "ellipsis": true }, { "title": "年级", "dataIndex": "gradeName", "align": "center", "width": 100, "exportWidth": 8, "ellipsis": true }, { "title": "班级", "dataIndex": "className", "align": "center", "width": 100, "exportWidth": 8, "ellipsis": true }, { "title": "订单总份数", "dataIndex": "totalCount", "align": "center", "exportWidth": 10, "width": 110 }, { "title": "订单总金额", "dataIndex": "totalOrderPrice", "align": "center", "width": 110, "exportWidth": 10, "scopedSlots": { "customRender": "totalOrderPrice" } }, { "title": "AA.果味牛奶+有机纯奶/酸奶 单价", "dataIndex": "packagePrice2526AA.果味牛奶+有机纯奶/酸奶18250", "align": "center", "ellipsis": true, "exportWidth": 16 }, { "title": "AA.果味牛奶+有机纯奶/酸奶 数量", "dataIndex": "packageTotal2526AA.果味牛奶+有机纯奶/酸奶18250", "align": "center", "exportWidth": 16, "ellipsis": true }, { "title": "AA.果味牛奶+有机纯奶/酸奶 金额", "dataIndex": "orderPrice2526AA.果味牛奶+有机纯奶/酸奶18250", "align": "center", "ellipsis": true, "exportWidth": 16 }, { "title": "C.125ml纯牛奶 单价", "dataIndex": "packagePrice1990C.125ml纯牛奶10260", "align": "center", "ellipsis": true, "exportWidth": 16 }, { "title": "C.125ml纯牛奶 数量", "dataIndex": "packageTotal1990C.125ml纯牛奶10260", "align": "center", "exportWidth": 16, "ellipsis": true }, { "title": "C.125ml纯牛奶 金额", "dataIndex": "orderPrice1990C.125ml纯牛奶10260", "align": "center", "ellipsis": true, "exportWidth": 16 }, { "title": "B.125ml纯牛奶 单价", "dataIndex": "packagePrice1989B.125ml纯牛奶9540", "align": "center", "ellipsis": true, "exportWidth": 16 }, { "title": "B.125ml纯牛奶 数量", "dataIndex": "packageTotal1989B.125ml纯牛奶9540", "align": "center", "exportWidth": 16, "ellipsis": true }, { "title": "B.125ml纯牛奶 金额", "dataIndex": "orderPrice1989B.125ml纯牛奶9540", "align": "center", "ellipsis": true, "exportWidth": 16 }, { "title": "C1.纯牛奶+果味牛奶 单价", "dataIndex": "packagePrice2058C1.纯牛奶+果味牛奶13500", "align": "center", "ellipsis": true, "exportWidth": 16 }, { "title": "C1.纯牛奶+果味牛奶 数量", "dataIndex": "packageTotal2058C1.纯牛奶+果味牛奶13500", "align": "center", "exportWidth": 16, "ellipsis": true }, { "title": "C1.纯牛奶+果味牛奶 金额", "dataIndex": "orderPrice2058C1.纯牛奶+果味牛奶13500", "align": "center", "ellipsis": true, "exportWidth": 16 }, { "title": "AA.果味牛奶+有机纯奶/酸奶 单价", "dataIndex": "packagePrice2526AA.果味牛奶+有机纯奶/酸奶16300", "align": "center", "ellipsis": true, "exportWidth": 16 }, { "title": "AA.果味牛奶+有机纯奶/酸奶 数量", "dataIndex": "packageTotal2526AA.果味牛奶+有机纯奶/酸奶16300", "align": "center", "exportWidth": 16, "ellipsis": true }, { "title": "AA.果味牛奶+有机纯奶/酸奶 金额", "dataIndex": "orderPrice2526AA.果味牛奶+有机纯奶/酸奶16300", "align": "center", "ellipsis": true, "exportWidth": 16 }, { "title": "B2.只喝纯牛奶 单价", "dataIndex": "packagePrice2408B2.只喝纯牛奶12250", "align": "center", "ellipsis": true, "exportWidth": 16 }, { "title": "B2.只喝纯牛奶 数量", "dataIndex": "packageTotal2408B2.只喝纯牛奶12250", "align": "center", "exportWidth": 16, "ellipsis": true }, { "title": "B2.只喝纯牛奶 金额", "dataIndex": "orderPrice2408B2.只喝纯牛奶12250", "align": "center", "ellipsis": true, "exportWidth": 16 }, { "title": "D.125ml学生奶 单价", "dataIndex": "packagePrice2056D.125ml学生奶9440", "align": "center", "ellipsis": true, "exportWidth": 16 }, { "title": "D.125ml学生奶 数量", "dataIndex": "packageTotal2056D.125ml学生奶9440", "align": "center", "exportWidth": 16, "ellipsis": true }, { "title": "D.125ml学生奶 金额", "dataIndex": "orderPrice2056D.125ml学生奶9440", "align": "center", "ellipsis": true, "exportWidth": 16 }, { "title": "C1.纯牛奶+果味牛奶 单价", "dataIndex": "packagePrice2058C1.纯牛奶+果味牛奶12750", "align": "center", "ellipsis": true, "exportWidth": 16 }, { "title": "C1.纯牛奶+果味牛奶 数量", "dataIndex": "packageTotal2058C1.纯牛奶+果味牛奶12750", "align": "center", "exportWidth": 16, "ellipsis": true }, { "title": "C1.纯牛奶+果味牛奶 金额", "dataIndex": "orderPrice2058C1.纯牛奶+果味牛奶12750", "align": "center", "ellipsis": true, "exportWidth": 16 }, { "title": "C2.只喝纯奶 单价", "dataIndex": "packagePrice2059C2.只喝纯奶12750", "align": "center", "ellipsis": true, "exportWidth": 16 }, { "title": "C2.只喝纯奶 数量", "dataIndex": "packageTotal2059C2.只喝纯奶12750", "align": "center", "exportWidth": 16, "ellipsis": true }, { "title": "C2.只喝纯奶 金额", "dataIndex": "orderPrice2059C2.只喝纯奶12750", "align": "center", "ellipsis": true, "exportWidth": 16 }, { "title": "C2.只喝果味牛奶 单价", "dataIndex": "packagePrice2059C2.只喝果味牛奶13500", "align": "center", "ellipsis": true, "exportWidth": 16 }, { "title": "C2.只喝果味牛奶 数量", "dataIndex": "packageTotal2059C2.只喝果味牛奶13500", "align": "center", "exportWidth": 16, "ellipsis": true }, { "title": "C2.只喝果味牛奶 金额", "dataIndex": "orderPrice2059C2.只喝果味牛奶13500", "align": "center", "ellipsis": true, "exportWidth": 16 }, { "title": "A2.果味牛奶+酸奶 单价", "dataIndex": "packagePrice2407A2.果味牛奶+酸奶16000", "align": "center", "ellipsis": true, "exportWidth": 16 }, { "title": "A2.果味牛奶+酸奶 数量", "dataIndex": "packageTotal2407A2.果味牛奶+酸奶16000", "align": "center", "exportWidth": 16, "ellipsis": true }, { "title": "A2.果味牛奶+酸奶 金额", "dataIndex": "orderPrice2407A2.果味牛奶+酸奶16000", "align": "center", "ellipsis": true, "exportWidth": 16 }, { "title": "A2.纯牛奶+酸奶+果味牛奶 单价", "dataIndex": "packagePrice2407A2.纯牛奶+酸奶+果味牛奶15500", "align": "center", "ellipsis": true, "exportWidth": 16 }, { "title": "A2.纯牛奶+酸奶+果味牛奶 数量", "dataIndex": "packageTotal2407A2.纯牛奶+酸奶+果味牛奶15500", "align": "center", "exportWidth": 16, "ellipsis": true }, { "title": "A2.纯牛奶+酸奶+果味牛奶 金额", "dataIndex": "orderPrice2407A2.纯牛奶+酸奶+果味牛奶15500", "align": "center", "ellipsis": true, "exportWidth": 16 }, { "title": "AA.果味牛奶+有机纯奶/酸奶 单价", "dataIndex": "packagePrice2526AA.果味牛奶+有机纯奶/酸奶17550", "align": "center", "ellipsis": true, "exportWidth": 16 }, { "title": "AA.果味牛奶+有机纯奶/酸奶 数量", "dataIndex": "packageTotal2526AA.果味牛奶+有机纯奶/酸奶17550", "align": "center", "exportWidth": 16, "ellipsis": true }, { "title": "AA.果味牛奶+有机纯奶/酸奶 金额", "dataIndex": "orderPrice2526AA.果味牛奶+有机纯奶/酸奶17550", "align": "center", "ellipsis": true, "exportWidth": 16 }, { "title": "C1.纯牛奶+果味牛奶 单价", "dataIndex": "packagePrice2058C1.纯牛奶+果味牛奶13000", "align": "center", "ellipsis": true, "exportWidth": 16 }, { "title": "C1.纯牛奶+果味牛奶 数量", "dataIndex": "packageTotal2058C1.纯牛奶+果味牛奶13000", "align": "center", "exportWidth": 16, "ellipsis": true }, { "title": "C1.纯牛奶+果味牛奶 金额", "dataIndex": "orderPrice2058C1.纯牛奶+果味牛奶13000", "align": "center", "ellipsis": true, "exportWidth": 16 }, { "title": "L1.纯奶+果味牛奶+有机纯奶/酸奶 单价", "dataIndex": "packagePrice2265L1.纯奶+果味牛奶+有机纯奶/酸奶15300", "align": "center", "ellipsis": true, "exportWidth": 16 }, { "title": "L1.纯奶+果味牛奶+有机纯奶/酸奶 数量", "dataIndex": "packageTotal2265L1.纯奶+果味牛奶+有机纯奶/酸奶15300", "align": "center", "exportWidth": 16, "ellipsis": true }, { "title": "L1.纯奶+果味牛奶+有机纯奶/酸奶 金额", "dataIndex": "orderPrice2265L1.纯奶+果味牛奶+有机纯奶/酸奶15300", "align": "center", "ellipsis": true, "exportWidth": 16 }, { "title": "AA.果味牛奶+有机纯奶/酸奶 单价", "dataIndex": "packagePrice2526AA.果味牛奶+有机纯奶/酸奶17300", "align": "center", "ellipsis": true, "exportWidth": 16 }, { "title": "AA.果味牛奶+有机纯奶/酸奶 数量", "dataIndex": "packageTotal2526AA.果味牛奶+有机纯奶/酸奶17300", "align": "center", "exportWidth": 16, "ellipsis": true }, { "title": "AA.果味牛奶+有机纯奶/酸奶 金额", "dataIndex": "orderPrice2526AA.果味牛奶+有机纯奶/酸奶17300", "align": "center", "ellipsis": true, "exportWidth": 16 }, { "title": "C.125ml纯牛奶 单价", "dataIndex": "packagePrice1990C.125ml纯牛奶10620", "align": "center", "ellipsis": true, "exportWidth": 16 }, { "title": "C.125ml纯牛奶 数量", "dataIndex": "packageTotal1990C.125ml纯牛奶10620", "align": "center", "exportWidth": 16, "ellipsis": true }, { "title": "C.125ml纯牛奶 金额", "dataIndex": "orderPrice1990C.125ml纯牛奶10620", "align": "center", "ellipsis": true, "exportWidth": 16 }, { "title": "B.125ml纯牛奶 单价", "dataIndex": "packagePrice1989B.125ml纯牛奶10620", "align": "center", "ellipsis": true, "exportWidth": 16 }, { "title": "B.125ml纯牛奶 数量", "dataIndex": "packageTotal1989B.125ml纯牛奶10620", "align": "center", "exportWidth": 16, "ellipsis": true }, { "title": "B.125ml纯牛奶 金额", "dataIndex": "orderPrice1989B.125ml纯牛奶10620", "align": "center", "ellipsis": true, "exportWidth": 16 }, { "title": "D2.只喝纯牛奶+酸奶 单价", "dataIndex": "packagePrice2716D2.只喝纯牛奶+酸奶16250", "align": "center", "ellipsis": true, "exportWidth": 16 }, { "title": "D2.只喝纯牛奶+酸奶 数量", "dataIndex": "packageTotal2716D2.只喝纯牛奶+酸奶16250", "align": "center", "exportWidth": 16, "ellipsis": true }, { "title": "D2.只喝纯牛奶+酸奶 金额", "dataIndex": "orderPrice2716D2.只喝纯牛奶+酸奶16250", "align": "center", "ellipsis": true, "exportWidth": 16 }, { "title": "AAA.只喝纯牛奶+有机纯奶/酸奶 单价", "dataIndex": "packagePrice2526AAA.只喝纯牛奶+有机纯奶/酸奶18700", "align": "center", "ellipsis": true, "exportWidth": 16 }, { "title": "AAA.只喝纯牛奶+有机纯奶/酸奶 数量", "dataIndex": "packageTotal2526AAA.只喝纯牛奶+有机纯奶/酸奶18700", "align": "center", "exportWidth": 16, "ellipsis": true }, { "title": "AAA.只喝纯牛奶+有机纯奶/酸奶 金额", "dataIndex": "orderPrice2526AAA.只喝纯牛奶+有机纯奶/酸奶18700", "align": "center", "ellipsis": true, "exportWidth": 16 }, { "title": "C2.只喝纯奶 单价", "dataIndex": "packagePrice2059C2.只喝纯奶13000", "align": "center", "ellipsis": true, "exportWidth": 16 }, { "title": "C2.只喝纯奶 数量", "dataIndex": "packageTotal2059C2.只喝纯奶13000", "align": "center", "exportWidth": 16, "ellipsis": true }, { "title": "C2.只喝纯奶 金额", "dataIndex": "orderPrice2059C2.只喝纯奶13000", "align": "center", "ellipsis": true, "exportWidth": 16 }, { "title": "B1.纯牛奶+果味牛奶 单价", "dataIndex": "packagePrice2409B1.纯牛奶+果味牛奶12250", "align": "center", "ellipsis": true, "exportWidth": 16 }, { "title": "B1.纯牛奶+果味牛奶 数量", "dataIndex": "packageTotal2409B1.纯牛奶+果味牛奶12250", "align": "center", "exportWidth": 16, "ellipsis": true }, { "title": "B1.纯牛奶+果味牛奶 金额", "dataIndex": "orderPrice2409B1.纯牛奶+果味牛奶12250", "align": "center", "ellipsis": true, "exportWidth": 16 }, { "title": "A2.纯牛奶+酸奶+果味牛奶 单价", "dataIndex": "packagePrice2407A2.纯牛奶+酸奶+果味牛奶17000", "align": "center", "ellipsis": true, "exportWidth": 16 }, { "title": "A2.纯牛奶+酸奶+果味牛奶 数量", "dataIndex": "packageTotal2407A2.纯牛奶+酸奶+果味牛奶17000", "align": "center", "exportWidth": 16, "ellipsis": true }, { "title": "A2.纯牛奶+酸奶+果味牛奶 金额", "dataIndex": "orderPrice2407A2.纯牛奶+酸奶+果味牛奶17000", "align": "center", "ellipsis": true, "exportWidth": 16 }] }
     }
   },
   created() {
@@ -1254,21 +1255,21 @@ export default {
     // })
     // this.utils.EventBusManagerUtils.post('liudonghan', '哈哈哈哈哈')
     // this.utils.EventBusManagerUtils.unregister('liudonghan')
-    this.utils.LocationManagerUtils.getCurrentLocation(result => {
-      console.warn('精确定位：', result)
-    })
-    this.utils.LocationManagerUtils.getCurrentCityLocation(result => {
-      console.warn('IP定位：', result)
-    })
-    this.utils.LocationManagerUtils.getWeatherLive('北京市', result => {
-      console.warn('天气数据：', result)
-    })
-    this.utils.LocationManagerUtils.getWeatherForecast('北京市', result => {
-      console.warn('预报数据：', result)
-    })
-    this.utils.LocationManagerUtils.getPoiSearch({ keyword: '江城明珠', city: '武汉' }, result => {
-      console.warn('POI周边信息：',result)
-    })
+    // this.utils.LocationManagerUtils.getCurrentLocation(result => {
+    //   console.warn('精确定位：', result)
+    // })
+    // this.utils.LocationManagerUtils.getCurrentCityLocation(result => {
+    //   console.warn('IP定位：', result)
+    // })
+    // this.utils.LocationManagerUtils.getWeatherLive('北京市', result => {
+    //   console.warn('天气数据：', result)
+    // })
+    // this.utils.LocationManagerUtils.getWeatherForecast('北京市', result => {
+    //   console.warn('预报数据：', result)
+    // })
+    // this.utils.LocationManagerUtils.getPoiSearch({ keyword: '江城明珠', city: '武汉' }, result => {
+    //   console.warn('POI周边信息：', result)
+    // })
     // this.utils.ChatMessageUtils.login('supplier_2103291574', 'eJwtjcsKwjAURP8l20hJYpMmBReNFl2oIBWkbqSQVK62kj4UH-jv1ra7mTPDzAft14n3sDUKEfMImvQejL21kEOPm7tzRSdPjJIpU5QH-lhrzDVzDgwKqU*IEL5kYkjs00FtO845Z4SQgbZQ-pmQARVCKTauwLl70TFm8wNtFE2zC34fF3pjEvvSttoCTvNit1xFsoxwJeMZ*v4Axzs0Rg__', data => {
     //   console.warn('IM登录：', data)
     // })
@@ -1294,11 +1295,11 @@ export default {
     // console.log('TIME', this.utils.ChatMessageUtils.TIM.TYPES)
     // console.log('cookies', this.utils.StorageManagerUtils.getCookies('cookies'))
     // console.log('cookiesObject', this.utils.StorageManagerUtils.getCookiesObject('cookiesObject'))
-    console.log('获取设备：', this.utils.DeviceManagerUtils.getDeviceManager())
+    // console.log('获取设备：', this.utils.DeviceManagerUtils.getDeviceManager())
     // console.log('组件', this.utils.FormatUtils.showMessageTime(1679706960 * 1000))
     // console.log('会话列表：', this.utils.ChatMessageUtils.getConversationList(this.conversationList))
     // console.log('接收消息：', this.utils.ChatMessageUtils.transformReceiveMessage(this.rec))
-    console.log('消息列表：', this.utils.ChatMessageUtils.transformMessageList(this.messageRecord))
+    // console.log('消息列表：', this.utils.ChatMessageUtils.transformMessageList(this.messageRecord))
     // console.log('获取数据', this.utils.ChatMessageUtils.isConstraintMessageSend([], this.message, 'user_2103315655', 'supplier_2103376451', 'single'))
     // for (let i = 0; i < this.message.length; i++) {
     //   console.log('是否显示：', utils.ChatMessageUtils.isShowMessageTime(i, this.message.length, this.message, this.message[i]['senderTimeMillis'] * 1000))
@@ -1319,8 +1320,8 @@ export default {
     //     console.log('合并异常：：', error)
     //
     //   })
-    this.flatMap()
-    console.log('验签：', this.decrypt('PLto6ctVfxAFKWyYCH1AOJjg_B_mhuyesLgcNSb8F1s=', '033730*^', '033730*^'))
+    // this.flatMap()
+    // console.log('验签：', this.decrypt('PLto6ctVfxAFKWyYCH1AOJjg_B_mhuyesLgcNSb8F1s=', '033730*^', '033730*^'))
   },
 
   methods: {
@@ -1427,12 +1428,19 @@ export default {
     },
 
     onClickLogin() {
+      console.log('登录')
+      api.baseMyfService().post('api/api/payOrder/export', this.params)
+        .then(succeed => {
 
+        })
+        .catch(error => {
+
+        })
     },
 
     onClickDemo() {
 
-    }
+    },
   }
 }
 </script>

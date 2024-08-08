@@ -52,7 +52,7 @@ export function getAmbApi() {
       switch (code.status) {
         case 200:
           switch (code.data.code) {
-            case  200:
+            case 200:
               return Promise.resolve(code.data)
             default:
               return Promise.reject({ code: code.data.code, message: code.data.message })
@@ -63,7 +63,35 @@ export function getAmbApi() {
           return Promise.reject({ code: code.status, message: code })
       }
     })
+}
 
+function baseMyfService() {
+  return liudonghan
+    .createAxiosServer()
+    .baseApi('https://uat-delivery-wlx.mengniu.cn/')
+    .addHeaders({
+      'Content-Type': 'application/json;charset=UTF-8',
+      'Wlx-Client-Id': 'Please enter your Client Id',
+      'Wlx-Ts': new Date().getTime().toString()
+    })
+    .transformRequestData((data, header) => {
+      console.log('~~~~~~~转换请求数据', data);
+      console.log('~~~~~~~转换请求头部', header)
+      data.demo = '刘冬涵'
+      header['demo'] = 'ssssssss'
+      return data
+    })
+    .addLogcatInterceptors()
+    .addParamsInterceptors(params => {
+      return params
+    })
+    .addCodeInterceptors(
+      code => {
+        return code
+      },
+      error => {
+        return error
+      })
 }
 
 export function getAxiosManger() {
@@ -75,6 +103,7 @@ export default {
   getShopApi,
   getLiveApi,
   getFileApi,
-  getAmbApi
+  getAmbApi,
+  baseMyfService
 }
 
