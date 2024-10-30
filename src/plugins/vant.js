@@ -2,11 +2,12 @@
 import Vue from 'vue'
 import {
   Icon, Tab, Tabs, Field, Uploader,
-  Cell, Sticky, NavBar, Swipe, SwipeItem, List,PullRefresh,
+  Cell, Sticky, NavBar, Swipe, SwipeItem, List, PullRefresh,
   Skeleton, NoticeBar, Grid, GridItem, Col,
   Row, Empty, Search, Popup, Picker, Checkbox,
-  Image as VanImage, Dialog,SubmitBar,ActionSheet,
-  RadioGroup, Radio,Switch,Divider,Step,Steps,Button
+  Image as VanImage, Dialog, SubmitBar, ActionSheet,
+  RadioGroup, Radio, Switch, Divider, Step, Steps, Button,
+  CellGroup, DropdownItem, DropdownMenu
 } from 'vant'
 // 2. 引入组件样式
 import 'vant/lib/index.css';
@@ -45,3 +46,6 @@ Vue.use(Divider);
 Vue.use(Step);
 Vue.use(Steps);
 Vue.use(Button);
+Vue.use(CellGroup);
+Vue.use(DropdownItem)
+Vue.use(DropdownMenu)

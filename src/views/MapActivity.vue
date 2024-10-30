@@ -46,7 +46,6 @@ export default {
       this.utils.LocationManagerUtils.addMap('container',{
           viewMode: '2D', //默认使用 2D 模式
           zoom: 14, //地图级别
-          center: [116.379028, 39.885042], //地图中心点
       },map => {
         console.log(map)
       })
