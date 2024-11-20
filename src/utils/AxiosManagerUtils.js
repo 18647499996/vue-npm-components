@@ -275,6 +275,15 @@ export function post(url, data) {
   return axiosManager.post(url, data)
 }
 
+/**
+ * todo put请求
+ * @param {*} url 
+ * @param {*} data 
+ * @returns 
+ */
+export function put(url, data) {
+  return axiosManager.put(url, JSON.stringify(data))
+}
 
 /**
  * todo get请求
@@ -296,6 +305,8 @@ export function form(url, data) {
   }
   return post(url, formData)
 }
+
+
 
 /**
  * todo 合并请求
@@ -344,6 +355,14 @@ export function flatMap(method, url, data) {
           }).catch(error => {
             reject(error)
           })
+      case 'put':
+        return put(url, data)
+          .then(succeed => {
+            resolve(succeed)
+          })
+          .catch(error => {
+            reject(error)
+          })
     }
   })
 }
@@ -369,6 +388,7 @@ export default {
   addBlobInterceptors,
   post,
   get,
+  put,
   merger,
   form,
   flatMap

@@ -95,6 +95,27 @@ function baseMyfService() {
       })
 }
 
+function getPutApi() {
+  return liudonghan.createAxiosServer()
+    .baseApi('https://tapi.9buqi.cn/')
+    .addHeaders({
+      'Content-Type': 'application/json;charset=UTF-8',
+      'Authorization': 'Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjNDMkYzMkQ1N0RBOTBGQzM5N0QwQjgyMTNFRjFFOUMyIiwidHlwIjoiYXQrand0In0.eyJuYmYiOjE3MzIwNjY3NjYsImV4cCI6MTgxODQ2Njc2NiwiaXNzIjoiaHR0cHM6Ly9sb2dpbi5sYXd4cC5jb20iLCJjbGllbnRfaWQiOiJhcHAiLCJzdWIiOiIyMTAzNTA5OTY3MTMiLCJhdXRoX3RpbWUiOjE3MzIwNjY3NjYsImlkcCI6ImxvY2FsIiwiVXNlcklkIjoiMjEwMzUwOTk2NyIsIm5hbWUiOiIxODUxNjIxOTcyNiIsImdpdmVuX25hbWUiOiLlpLTlg48iLCJlbWFpbCI6IjE4NTE2MjE5NzI2QHBob25lLmNvbSIsImp0aSI6IjQzMjUxMTVBMjk3NDEwMjhBRUVDQUM2QUMwMUVENTQxIiwiaWF0IjoxNzMyMDY2NzY2LCJzY29wZSI6WyJvcGVuaWQiLCJwcm9maWxlIiwib2ZmbGluZV9hY2Nlc3MiXSwiYW1yIjpbImN1c3RvbSJdfQ.TSlkT2f_0ccZ7nObIqJhIb64JzalLjRJuDtFCTQaTa9QVYvId_qgA2-Beim408jnuii0pTOWt1RkkdGtws49l2yA6JOGId0D17nlM0xeWKhyfamD3M1z-TXS6prD1o8xK74-zid4E0PGfyK_250zbztnaE_3vPnnkEEiC9F2uNPHeUb-JI2GCGjHrkbxW3ID4mpes0VlFOIfaBaqqV5jcBzy0cCdIOn4q9hp9yJIF8FPdIC2LKSabOsjEviUQSbBzWWPa0b-dx7WNll8sJHJZhcW5iDUUDFzzkgzaifP7WjC8WAuQlhIZ69uQIqFEyNy412pAENzY8kdMM4E5WLSCA'
+    })
+    .addLogcatInterceptors()
+    .addParamsInterceptors(params => {
+      return params
+    })
+    .addCodeInterceptors(
+      code => {
+        return code
+      },
+      error => {
+        console.log(error.response)
+        return error
+      })
+}
+
 export function getAxiosManger() {
   return liudonghan.createAxiosServer()
 }
@@ -105,6 +126,7 @@ export default {
   getLiveApi,
   getFileApi,
   getAmbApi,
-  baseMyfService
+  baseMyfService,
+  getPutApi
 }
 

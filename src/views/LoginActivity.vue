@@ -1322,6 +1322,13 @@ export default {
     //   })
     // this.flatMap()
     // console.log('验签：', this.decrypt('PLto6ctVfxAFKWyYCH1AOJjg_B_mhuyesLgcNSb8F1s=', '033730*^', '033730*^'))
+    api.getPutApi().put('merchant/v2/activity/exhibition/del?', { id: 14 })
+      .then(succeed => {
+
+      })
+      .catch(error => {
+
+      })
   },
 
   methods: {
@@ -1434,7 +1441,7 @@ export default {
 
         })
         .catch(error => {
-          
+
         })
     },
 

@@ -1,14 +1,13 @@
 <template>
   <van-row class='row-body'>
-    <van-picker :columns="columns" @change="onChange" />
-    <van-row v-for="(item, index) in selectChildList" :key="index">
-      <van-checkbox style="height: 30px;" v-model="item.checked" shape="square">{{ item.regionName }}</van-checkbox>
+    <van-row v-for="(items, position) in mergeGoalsList" :key="position">
+      <van-picker :columns="items.columns"
+        @change="(picker, value, index) => onChange(items, position, picker, value, index)" />
+      <van-row v-for="(item, index) in items.selectChildList" :key="index">
+        <van-checkbox style="height: 30px;" v-model="item.checked" shape="square">{{ item.regionName }}</van-checkbox>
+      </van-row>
     </van-row>
     <van-button type="primary" @click="onClick">拆分</van-button>
-
-    <van-popup v-model="showPicker" round position="bottom">
-      <van-picker show-toolbar :columns="columns" @cancel="showPicker = false" @confirm="onConfirm" />
-    </van-popup>
   </van-row>
 
 
@@ -20,140 +19,8 @@ export default {
   name: 'HomeActivity',
   data() {
     return {
-      showPicker: false,
       value1: '57856',
-      columns: [
-        {
-          "searchValue": null,
-          "createUserId": "1",
-          "createUserName": "admin",
-          "createTime": "2023-07-31 22:16:42",
-          "updateUserId": "2355",
-          "updateUserName": "MN18810642341ZB",
-          "updateTime": "2024-02-23 11:05:21",
-          "remark": null,
-          "params": {
 
-          },
-          "pageNum": null,
-          "pageSize": null,
-          "token": null,
-          "id": 57856,
-          "value": 57856,
-          "text": "晋蒙东北",
-          "regionName": "晋蒙东北",
-          "responsiblePerson": "邹恒",
-          "responsiblePhone": "13359518688",
-          "status": 1,
-          "deleted": 0,
-          "password": null,
-          "userId": null
-        },
-        {
-          "searchValue": null,
-          "createUserId": "1",
-          "createUserName": "admin",
-          "createTime": "2023-07-31 22:16:58",
-          "updateUserId": "2355",
-          "updateUserName": "MN18810642341ZB",
-          "updateTime": "2024-02-23 11:04:53",
-          "remark": null,
-          "params": {
-
-          },
-          "pageNum": null,
-          "pageSize": null,
-          "token": null,
-          "id": 57857,
-          "regionName": "鲁皖",
-          "value": 57857,
-          "text": "鲁皖",
-          "responsiblePerson": "路金桥",
-          "responsiblePhone": "17260485253",
-          "status": 1,
-          "deleted": 0,
-          "password": null,
-          "userId": null
-        },
-        {
-          "searchValue": null,
-          "createUserId": "1",
-          "createUserName": "admin",
-          "createTime": "2023-07-31 22:17:13",
-          "updateUserId": "2355",
-          "updateUserName": "MN18810642341ZB",
-          "updateTime": "2024-02-23 11:04:11",
-          "remark": null,
-          "params": {
-
-          },
-          "pageNum": null,
-          "pageSize": null,
-          "token": null,
-          "id": 57858,
-          "regionName": "江浙沪",
-          "value": 57858,
-          "text": "江浙沪",
-          "responsiblePerson": "杨偲晨",
-          "responsiblePhone": "15951405315",
-          "status": 1,
-          "deleted": 0,
-          "password": null,
-          "userId": null
-        },
-        {
-          "searchValue": null,
-          "createUserId": "1",
-          "createUserName": "admin",
-          "createTime": "2023-07-31 22:17:28",
-          "updateUserId": "2355",
-          "updateUserName": "MN18810642341ZB",
-          "updateTime": "2024-02-23 11:03:29",
-          "remark": null,
-          "params": {
-
-          },
-          "pageNum": null,
-          "pageSize": null,
-          "token": null,
-          "id": 57859,
-          "regionName": "京津冀",
-          "value": 57859,
-          "text": "京津冀",
-          "responsiblePerson": "蔡素成",
-          "responsiblePhone": "15822796618",
-          "status": 1,
-          "deleted": 0,
-          "password": null,
-          "userId": null
-        },
-        {
-          "searchValue": null,
-          "createUserId": "1",
-          "createUserName": "admin",
-          "createTime": "2023-07-31 22:17:42",
-          "updateUserId": "2355",
-          "updateUserName": "MN18810642341ZB",
-          "updateTime": "2024-02-23 11:03:03",
-          "remark": null,
-          "params": {
-
-          },
-          "pageNum": null,
-          "pageSize": null,
-          "token": null,
-          "id": 57860,
-          "regionName": "中南",
-          "value": 57860,
-          "text": "中南",
-          "responsiblePerson": "雷文浩",
-          "responsiblePhone": "17324001683",
-          "status": 1,
-          "deleted": 0,
-          "password": null,
-          "userId": null
-        }
-      ],
       childColumns: [
         {
           "searchValue": null,
@@ -468,8 +335,142 @@ export default {
           "userId": null
         }
       ],
-      selectChildList: [],
       selectSplit: [],
+      mergeGoalsList: [{
+        columns: [
+          {
+            "searchValue": null,
+            "createUserId": "1",
+            "createUserName": "admin",
+            "createTime": "2023-07-31 22:16:42",
+            "updateUserId": "2355",
+            "updateUserName": "MN18810642341ZB",
+            "updateTime": "2024-02-23 11:05:21",
+            "remark": null,
+            "params": {
+
+            },
+            "pageNum": null,
+            "pageSize": null,
+            "token": null,
+            "id": 57856,
+            "value": 57856,
+            "text": "晋蒙东北",
+            "regionName": "晋蒙东北",
+            "responsiblePerson": "邹恒",
+            "responsiblePhone": "13359518688",
+            "status": 1,
+            "deleted": 0,
+            "password": null,
+            "userId": null
+          },
+          {
+            "searchValue": null,
+            "createUserId": "1",
+            "createUserName": "admin",
+            "createTime": "2023-07-31 22:16:58",
+            "updateUserId": "2355",
+            "updateUserName": "MN18810642341ZB",
+            "updateTime": "2024-02-23 11:04:53",
+            "remark": null,
+            "params": {
+
+            },
+            "pageNum": null,
+            "pageSize": null,
+            "token": null,
+            "id": 57857,
+            "regionName": "鲁皖",
+            "value": 57857,
+            "text": "鲁皖",
+            "responsiblePerson": "路金桥",
+            "responsiblePhone": "17260485253",
+            "status": 1,
+            "deleted": 0,
+            "password": null,
+            "userId": null
+          },
+          {
+            "searchValue": null,
+            "createUserId": "1",
+            "createUserName": "admin",
+            "createTime": "2023-07-31 22:17:13",
+            "updateUserId": "2355",
+            "updateUserName": "MN18810642341ZB",
+            "updateTime": "2024-02-23 11:04:11",
+            "remark": null,
+            "params": {
+
+            },
+            "pageNum": null,
+            "pageSize": null,
+            "token": null,
+            "id": 57858,
+            "regionName": "江浙沪",
+            "value": 57858,
+            "text": "江浙沪",
+            "responsiblePerson": "杨偲晨",
+            "responsiblePhone": "15951405315",
+            "status": 1,
+            "deleted": 0,
+            "password": null,
+            "userId": null
+          },
+          {
+            "searchValue": null,
+            "createUserId": "1",
+            "createUserName": "admin",
+            "createTime": "2023-07-31 22:17:28",
+            "updateUserId": "2355",
+            "updateUserName": "MN18810642341ZB",
+            "updateTime": "2024-02-23 11:03:29",
+            "remark": null,
+            "params": {
+
+            },
+            "pageNum": null,
+            "pageSize": null,
+            "token": null,
+            "id": 57859,
+            "regionName": "京津冀",
+            "value": 57859,
+            "text": "京津冀",
+            "responsiblePerson": "蔡素成",
+            "responsiblePhone": "15822796618",
+            "status": 1,
+            "deleted": 0,
+            "password": null,
+            "userId": null
+          },
+          {
+            "searchValue": null,
+            "createUserId": "1",
+            "createUserName": "admin",
+            "createTime": "2023-07-31 22:17:42",
+            "updateUserId": "2355",
+            "updateUserName": "MN18810642341ZB",
+            "updateTime": "2024-02-23 11:03:03",
+            "remark": null,
+            "params": {
+
+            },
+            "pageNum": null,
+            "pageSize": null,
+            "token": null,
+            "id": 57860,
+            "regionName": "中南",
+            "value": 57860,
+            "text": "中南",
+            "responsiblePerson": "雷文浩",
+            "responsiblePhone": "17324001683",
+            "status": 1,
+            "deleted": 0,
+            "password": null,
+            "userId": null
+          }
+        ],
+        selectChildList: [],
+      }]
     }
   },
 
@@ -484,15 +485,18 @@ export default {
   },
 
   methods: {
-    onChange(picker, value, index) {
-      this.selectChildList = []
+    onChange(items, position, picker, value, index) {
+      items.selectChildList = []
+      for (let i = 0; i < items.columns.length; i++) {
+        items.columns[i].check = items.columns[i].id === value.id
+      }
       for (let index = 0; index < this.childColumns.length; index++) {
         const element = this.childColumns[index];
         if (value.id == element.largeRegionId) {
-          this.selectChildList.push(element)
+          items.selectChildList.push(element)
         }
       }
-      console.log('~~~~~~选择二级~~~~~~~~', this.selectChildList)
+      console.log('~~~~~~选择二级~~~~~~~~', items)
     },
 
     checkToggle(value) {
@@ -500,56 +504,8 @@ export default {
     },
 
     onClick() {
-      this.showPicker = true
-    },
 
-    onConfirm(item, index) {
-      this.showPicker = false
-      console.log('~~~~~~~~~~~选中目标大区~~~~~~~', item)
-      var child = []
-      // todo 第一步：首先遍历二级省份列表（ 获取已选中的二级省份 ）
-      for (let index = 0; index < this.selectChildList.length; index++) {
-        const element = this.selectChildList[index];
-        if (element.checked) {
-          child.push(element)
-        }
-      }
-      // todo 第二步：然后判断selectSplit( 目标大区数据 )里面元素是否为空
-      if (this.selectSplit.length == 0) {
-        // 如果为空的话说明是否首次操作拆分，直接添加组装并添加大区
-        // 将已选中的二级省份列表添加到目标大区下面
-        item.child = child
-        this.selectSplit.push(item)
-        console.log('~~~~~~~~首次选择~~~~~~~', this.selectSplit)
-      } else {
-        // todo 如果selectSplit( 目标大区 )列表数据不为空 则判断是否包含当前选择的目标大区
-        var isSome = this.selectSplit.findIndex(value => value.id === item.id)
-        if (isSome == -1) {
-          // 不包含当前选中目标大区对象
-          // 将已选中的二级省份列表添加到目标大区下面
-          item.child = child
-          this.selectSplit.push(item)
-        } else {
-          // 包含当前选中目标大区
-          for (let i = 0; i < this.selectSplit.length; i++) {
-            const element = this.selectSplit[i];
-            // 遍历目标大区列表（ 判断筛选当前选中大区数据
-            if (item.id == element.id) {
-              // 遍历当前选中的省区列表（ 二级列表 ）
-              for (let j = 0; j < child.length; j++) {
-                const c = child[j];
-                // 判断当前是否包含当前省区列表（ 二级列表 ）
-                var findIndex = element.child.findIndex(value => value.id === c.id)
-                if (findIndex === -1) {
-                  element.child.push(c)
-                }
-              }
-            }
-          }
-        }
-        console.log('~~~~~~~~当前拆分大区数据~~~~~~', this.selectSplit)
-      }
-    }
+    },
   }
 }
 
