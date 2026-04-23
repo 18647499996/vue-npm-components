@@ -20,7 +20,7 @@
 ```javascript
 import BaseTableComponents from 'liudonghan-components'; 
 // 或根据你的包结构导入
-import { BaseTableComponents } from 'liudonghan-components';
+import { BaseTableComponents,BaseDynamicFormComponents,BaseControlFieldComponents } from 'liudonghan-components';
 ```
 
 ### 2. 在模板中使用
@@ -264,3 +264,133 @@ export default {
 1. **数据响应式**：请确保传入 `model` 的对象在初始化时已经包含了 `fields` 中定义的所有 `key`，否则可能导致双向绑定失效。
 2. **JSZip 依赖**：源码中引用了 `jszip`，请确保项目中已安装该依赖，或者检查是否为多余引用（组件内目前主要处理逻辑似乎暂未深度使用 jszip，建议在正式发布包时核实）。
 3. **上传地址**：目前 `el-upload` 的 `action` 默认为 `"123"` 且关闭了自动上传，文件将存储在 `model[key]` 的数组中，提交时需自行处理文件流。
+
+
+这是为你定制的 `BaseControlFieldComponents` 使用手册。该组件通常用于后台管理系统的**列表顶部筛选栏**，集成日期、多个下拉框、搜索框以及常用操作按钮。
+
+---
+
+# BaseControlFieldComponents
+
+基于 Vue 2 和 Element UI 封装的**列表控制栏组件**。主要用于表格上方的搜索条件组合、按钮操作区，支持高度自定义的筛选配置。
+
+## 1. 核心功能
+* **日期范围选择**：一键开启/关闭 `daterange` 筛选。
+* **动态下拉组**：支持传入数组自动生成多个 `el-select`。
+* **搜索输入框**：内置防抖样式的查询输入。
+* **操作按钮组**：内置查询、新增、导出三个常用按钮。
+* **自定义扩展**：末尾预留插槽，支持插入自定义按钮或组件。
+
+---
+
+## 2. 快速上手
+
+### 基本用法
+
+```vue
+<template>
+  <base-control-field-components
+    :selectArray="selectConfigs"
+    :input="searchConfig"
+    @onClickListenerQuery="fetchData"
+    @onClickListenerCreate="openModal"
+  >
+    <template #last>
+      <el-button type="success" @click="handleBatchAudit">批量审核</el-button>
+    </template>
+  </base-control-field-components>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      // 下拉框配置
+      selectConfigs: [
+        { 
+          label: '状态', 
+          value: '', 
+          placeholder: '请选择状态', 
+          opstion: [{label: '启用', value: 1}, {label: '禁用', value: 0}],
+          width: '150px',
+          hide: true,
+          allowClear: true 
+        }
+      ],
+      // 搜索框配置
+      searchConfig: {
+        show: true,
+        placeholder: '请输入关键字查询',
+        value: '',
+        width: '200px'
+      }
+    };
+  },
+  methods: {
+    fetchData() { console.log('触发查询'); },
+    openModal() { console.log('触发新增'); }
+  }
+};
+</script>
+```
+
+---
+
+## 3. 配置参数 (Props)
+
+### 基础配置
+| 参数 | 说明 | 类型 | 默认值 |
+| :--- | :--- | :--- | :--- |
+| `showRangePicker`| 是否显示日期范围选择器 | Boolean | `true` |
+| `picker` | 日期类型（如 `daterange`, `monthrange`） | String | `'daterange'` |
+| `showQueryBtn` | 是否显示“查询”按钮 | Boolean | `true` |
+| `showCreateBtn` | 是否显示“新增/创建”按钮 | Boolean | `false` |
+| `showExportBtn` | 是否显示“导出”按钮 | Boolean | `false` |
+| `createBtnPlaceholder` | 新增按钮的文字内容 | String | `'新增'` |
+
+### 复杂对象配置
+#### `selectArray` (Array)
+用于生成多个下拉框，数组每一项包含：
+* `value`: 绑定值
+* `placeholder`: 占位符
+* `width`: 宽度（需带单位，如 `'120px'`）
+* `opstion`: 选项数组 `[{label: '', value: ''}]`
+* `hide`: 是否显示（注意：源码中使用 `v-show="item.hide"`，请确保设为 `true`）
+* `allowClear`: 是否允许清空
+* `disabled`: 是否禁用
+
+#### `input` (Object)
+| 属性 | 说明 | 默认值 |
+| :--- | :--- | :--- |
+| `show` | 是否显示输入框 | `true` |
+| `placeholder`| 占位符 | `''` |
+| `value` | 绑定值 | `undefined` |
+| `width` | 宽度 | `'300px'` |
+
+---
+
+## 4. 事件 (Events)
+
+| 事件名 | 说明 | 回调参数 |
+| :--- | :--- | :--- |
+| `handleRangePickerChange` | 日期改变时触发 | `(value, dateString)` |
+| `handleSelectChange` | 任意一个下拉框改变时触发 | `(value, index)` |
+| `handleInputChange` | 输入框内容改变时触发 | `(event)` |
+| `onClickListenerQuery` | 点击查询按钮 | `-` |
+| `onClickListenerCreate` | 点击新增按钮 | `-` |
+| `onClickListenerExport` | 点击导出按钮 | `-` |
+
+---
+
+## 5. 插槽 (Slots)
+
+| 插槽名 | 说明 |
+| :--- | :--- |
+| `last` | 位于控制栏最右侧的区域，通常用于放置额外的操作按钮。 |
+
+---
+
+## 6. 使用注意
+1. **下拉框显示**：请务必检查 `selectArray` 中每一项的 `hide` 属性是否为 `true`，否则下拉框将不会渲染。
+2. **数据同步**：由于 Vue 2 的 `v-model` 在 props 上是单向的，建议在监听 `handleSelectChange` 或 `handleInputChange` 时，同步更新父组件的数据源。
+3. **Element UI 依赖**：该组件强制依赖 `el-row`, `el-select`, `el-input`, `el-date-picker`, `el-button`。
