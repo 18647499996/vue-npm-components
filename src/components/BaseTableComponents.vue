@@ -263,11 +263,4 @@ export default {
   justify-content: flex-end;
   align-items: center;
 }
-
-.table_detault {
-  th {
-    background-color: #CCE1F9 !important;
-    color: #505050;
-  }
-}
 </style>
