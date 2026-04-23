@@ -12,6 +12,8 @@ import { $cdn } from '@/config'
 import '@/plugins/vant'
 // 刘冬涵插件
 import utils from '@/utils'
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
 
 Vue.prototype.$cdn = $cdn
 Vue.prototype.utils = utils
@@ -21,6 +23,7 @@ Vue.prototype.utils.ConstantManagerUtils.config.mapSecurityCode = '7713f4ba19ee0
 Vue.prototype.utils.ConstantManagerUtils.config.mapKey = '639d4746cedd0f218a1ce498f10d9559'
 Vue.prototype.utils.ConstantManagerUtils.config.timSdkId = '1400664826'
 Vue.prototype.utils.ConstantManagerUtils.config.logLevel = 1
+Vue.use(ElementUI);
 
 new Vue({
   el: '#app',
