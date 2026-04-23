@@ -128,3 +128,139 @@ export default {
     pageSize: 20
   }
   ```
+
+
+  这是为你定制的 `BaseDynamicFormComponents` 使用手册。该组件通过配置化的方式快速生成表单，极大地减少了重复编写 `el-form-item` 的工作量。
+
+---
+
+# BaseDynamicFormComponents
+
+基于 Vue 2 和 Element UI 封装的**动态表单组件**。只需传入一份配置文件（Fields），即可快速生成包含输入框、下拉框、日期、上传、自定义插槽等功能的完整表单。
+
+## 1. 核心功能
+* **配置驱动**：通过数组配置生成表单，支持 7+ 种常用表单控件。
+* **内置校验**：集成 Element UI 原生校验逻辑。
+* **文件上传**：内置简易文件选择与移除处理逻辑。
+* **插槽扩展**：支持通过 `type: 'slot'` 实现复杂的自定义交互。
+* **自动布局**：支持内联模式、标签对齐方式等配置。
+
+---
+
+## 2. 快速上手
+
+### 基本用法
+
+```vue
+<template>
+  <base-dynamic-form-components
+    :fields="formFields"
+    :model="formData"
+    @submit="handleSave"
+  />
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      formData: {
+        username: '',
+        role: '',
+        attachments: []
+      },
+      formFields: [
+        { type: 'input', label: '用户名', key: 'username', placeholder: '请输入内容', rules: [{ required: true, message: '必填' }] },
+        { type: 'select', label: '角色', key: 'role', options: [
+            { label: '管理员', value: 'admin' },
+            { label: '普通用户', value: 'user' }
+          ] 
+        },
+        { type: 'upload', label: '附件', key: 'attachments' }
+      ]
+    };
+  },
+  methods: {
+    handleSave(data) {
+      console.log('表单提交数据：', data);
+    }
+  }
+};
+</script>
+```
+
+---
+
+## 3. 配置参数 (Props)
+
+| 参数 | 说明 | 类型 | 默认值 |
+| :--- | :--- | :--- | :--- |
+| `fields` | **(必传)** 表单字段配置数组 | Array | `[]` |
+| `model` | **(必传)** 表单绑定数据对象 | Object | `{}` |
+| `rules` | 全局验证规则（同 el-form） | Object | `{}` |
+| `labelWidth` | 标签宽度 | String/Number | `'120px'` |
+| `labelPosition`| 标签位置 (left/right/top) | String | `'left'` |
+| `inline` | 是否为行内表单 | Boolean | `false` |
+| `size` | 组件尺寸 (large/medium/small/mini) | String | `'small'` |
+| `loading` | 提交按钮的 loading 状态 | Boolean | `false` |
+| `showButtons` | 是否显示底部操作按钮区域 | Boolean | `true` |
+| `submitBtnText`| 提交按钮文字 | String | `'提交'` |
+
+---
+
+## 4. 字段配置项 (Fields Item)
+
+每个 field 对象代表一个表单项：
+
+| 属性 | 说明 | 适用类型 |
+| :--- | :--- | :--- |
+| `type` | 控件类型: `input`, `select`, `date`, `checkbox`, `radio`, `textarea`, `upload`, `slot` | 所有 |
+| `key` | 对应 `model` 中的键名 | 所有 |
+| `label` | 表单项标签文本 | 所有 |
+| `placeholder`| 占位提示语 | input, select, date, textarea |
+| `options` | 选项列表：`[{ label: 'A', value: '1' }]` | select, checkbox, radio |
+| `rules` | 单个字段的校验规则 | 所有 |
+| `disabled` | 是否禁用 | 所有 |
+| `multiple` | 是否支持多选 | select |
+| `inputType` | 原生类型 (text, password, number) | input |
+| `dateType` | 日期类型 (date, daterange, datetime 等) | date |
+| `rows` | 文本域行数 | textarea |
+| `limit` | 最大上传数量限制 | upload |
+
+---
+
+## 5. 高级用法
+
+### 使用自定义插槽 (Slot)
+当内置控件无法满足需求时，可以使用 `slot`：
+
+```javascript
+// fields 配置
+{ type: 'slot', label: '自定义项', key: 'mySpecialItem' }
+```
+
+```vue
+<base-dynamic-form-components :fields="fields" :model="formData">
+  <template v-slot:mySpecialItem="{ field, form }">
+    <el-color-picker v-model="form[field.key]" />
+    <span>请选择颜色</span>
+  </template>
+</base-dynamic-form-components>
+```
+
+---
+
+## 6. 事件 (Events)
+
+| 事件名 | 说明 | 回调参数 |
+| :--- | :--- | :--- |
+| `submit` | 验证通过并点击提交按钮时触发 | `(formData)` |
+| `validate-error`| 验证失败时触发 | `(errorObject)` |
+| `reset` | 点击重置按钮时触发 | `-` |
+
+---
+
+## 7. 注意事项
+1. **数据响应式**：请确保传入 `model` 的对象在初始化时已经包含了 `fields` 中定义的所有 `key`，否则可能导致双向绑定失效。
+2. **JSZip 依赖**：源码中引用了 `jszip`，请确保项目中已安装该依赖，或者检查是否为多余引用（组件内目前主要处理逻辑似乎暂未深度使用 jszip，建议在正式发布包时核实）。
+3. **上传地址**：目前 `el-upload` 的 `action` 默认为 `"123"` 且关闭了自动上传，文件将存储在 `model[key]` 的数组中，提交时需自行处理文件流。
