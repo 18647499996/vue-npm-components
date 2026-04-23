@@ -12,7 +12,8 @@
       <!-- 下拉选择框 -->
       <el-form-item v-else-if="field.type === 'select'" :label="field.label" :prop="field.key" :rules="field.rules">
         <el-select v-model="model[field.key]" :placeholder="field.placeholder" :disabled="field.disabled"
-          :clearable="field.clearable !== false" :multiple="field.multiple" :filterable="field.filterable !== false">
+          @change="(e) => { handleSelectChange(e, field, index) }" :clearable="field.clearable !== false"
+          :multiple="field.multiple" :filterable="field.filterable !== false">
           <el-option v-for="option in field.options" :key="option.value" :label="option.label" :value="option.value" />
         </el-select>
       </el-form-item>
@@ -182,6 +183,15 @@ export default {
         .catch(errors => {
           this.$emit('validate-error', errors)
         })
+    },
+
+    /**
+     * 选择框change事件
+     * @param {*} e 选择数据
+     * @param {*} field 表单字段
+     */
+    handleSelectChange(e, field, index) {
+      this.$emit('handleSelectChange', e, field, index)
     },
 
     handleFileChange(file, dataModel, key) {
