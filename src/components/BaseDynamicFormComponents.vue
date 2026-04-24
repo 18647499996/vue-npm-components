@@ -177,11 +177,13 @@ export default {
 
     // 提交表单
     handleSubmit() {
+      this.loading = true
       this.validate()
         .then(data => {
           this.$emit('submit', data)
         })
         .catch(errors => {
+          this.loading = false
           this.$emit('validate-error', errors)
         })
     },
