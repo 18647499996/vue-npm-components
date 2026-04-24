@@ -13,17 +13,18 @@
     </el-select>
     <!-- 输入框 -->
     <el-input v-if="input.show" v-model:value="input.value" :placeholder="input.placeholder"
-      :style="{ width: input.width, marginLeft: '8px' }" @change="handleInputChange" allowClear />
+      :style="{ width: input.width, marginLeft: '8px' }" @change="handleInputChange"
+      :clearable="input.allowClear || true" />
     <!-- 查询按钮 -->
     <el-button :style="{ marginLeft: '8px' }" v-if="showQueryBtn" type="primary" @click="onClickListenerQuery">
       查询
     </el-button>
     <!-- 创建/新增按钮 -->
-    <el-button :style="{ marginLeft: '8px' }" v-if="showCreateBtn" type="primary" @click="onClickListenerCreate">
+    <el-button :style="{ marginLeft: '8px' }" v-if="showCreateBtn" type="danger" @click="onClickListenerCreate">
       {{ createBtnPlaceholder }}
     </el-button>
     <!-- 导出按钮 -->
-    <el-button :style="{ marginLeft: '8px' }" v-if="showExportBtn" type="primary" @click="onClickListenerExport">
+    <el-button :style="{ marginLeft: '8px' }" v-if="showExportBtn" type="warning" @click="onClickListenerExport">
       导出
     </el-button>
     <!-- 插槽 -->

@@ -6,14 +6,14 @@
       <el-form-item v-if="field.type === 'input'" :label="field.label" :prop="field.key" :rules="field.rules">
         <el-input v-model="model[field.key]" :placeholder="field.placeholder" :disabled="field.disabled"
           :clearable="field.clearable !== false" :type="field.inputType || 'text'" :maxlength="field.maxlength"
-          :show-word-limit="field.showWordLimit" />
+          :show-word-limit="field.showWordLimit" :style="{ width: field.width || '60%' }" />
       </el-form-item>
 
       <!-- 下拉选择框 -->
       <el-form-item v-else-if="field.type === 'select'" :label="field.label" :prop="field.key" :rules="field.rules">
         <el-select v-model="model[field.key]" :placeholder="field.placeholder" :disabled="field.disabled"
-          @change="(e) => { handleSelectChange(e, field, index) }" :clearable="field.clearable !== false"
-          :multiple="field.multiple" :filterable="field.filterable !== false">
+          :style="{ width: field.width || '50%' }" @change="(e) => { handleSelectChange(e, field, index) }"
+          :clearable="field.clearable !== false" :multiple="field.multiple" :filterable="field.filterable !== false">
           <el-option v-for="option in field.options" :key="option.value" :label="option.label" :value="option.value" />
         </el-select>
       </el-form-item>
@@ -46,7 +46,8 @@
       <!-- 文本域 -->
       <el-form-item v-else-if="field.type === 'textarea'" :label="field.label" :prop="field.key" :rules="field.rules">
         <el-input v-model="model[field.key]" type="textarea" :placeholder="field.placeholder" :disabled="field.disabled"
-          :rows="field.rows || 3" :maxlength="field.maxlength" :show-word-limit="field.showWordLimit" />
+          :style="{ width: field.width || '60%' }" :rows="field.rows || 3" :maxlength="field.maxlength"
+          :show-word-limit="field.showWordLimit" />
       </el-form-item>
 
       <!-- 上传文件 -->
@@ -152,7 +153,7 @@ export default {
   watch: {
     fields: {
       handler(newVal, oldVal) {
-        console.log('fields 变化了', newVal)
+        console.log('update fields', newVal)
         this.fields = newVal
       },
       deep: true,
@@ -189,9 +190,11 @@ export default {
      * 选择框change事件
      * @param {*} e 选择数据
      * @param {*} field 表单字段
+     * @param {*} index 索引
      */
     handleSelectChange(e, field, index) {
-      this.$emit('handleSelectChange', e, field, index)
+      const object = field.options.find(item => item.value == e)
+      this.$emit('handleSelectChange', e, field, object, index)
     },
 
     handleFileChange(file, dataModel, key) {
