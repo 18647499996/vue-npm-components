@@ -31,11 +31,17 @@
         <el-button size="small" type="danger" @click="deleteRow(row)">删除</el-button>
       </template>
     </base-table-components>
-    <base-dynamic-form-components :fields="fields" :model="model" :rules="rules"
-      @submit="handleSubmit" @reset="handleReset">
-      <template #button>
-        <el-button type="primary" @click="handleSubmit">提交</el-button>
-        <el-button @click="handleReset">重置</el-button>
+    <base-dynamic-form-components style="margin-left: 50px;margin-right: 50px;" :fields="formFields" :model="formModel"
+      :rules="rules" @submit="handleSubmit" @reset="handleReset" @validate-error="handleValidateError">
+      <!-- 自定义插槽 -->
+      <template #endDate="{ field, form }">
+        <el-date-picker v-model="form.startDate" type="date" placeholder="开始日期" value-format="yyyy-MM-dd"
+          style="width: 150px;">
+        </el-date-picker>
+        <span style="margin-left: 12px;margin-right: 12px;">至</span>
+        <el-date-picker v-model="form.endDate" type="date" placeholder="结束日期" value-format="yyyy-MM-dd"
+          style="width: 150px;" :disabled="form.startDate == null" :picker-options="endDatePickerOptions">
+        </el-date-picker>
       </template>
     </base-dynamic-form-components>
   </div>
@@ -47,7 +53,7 @@ import BaseControlFieldComponents from '../components/BaseControlFieldComponents
 import BaseDynamicFormComponents from '../components/BaseDynamicFormComponents.vue';
 
 export default {
-  components: { BaseTableComponents, BaseControlFieldComponents,BaseDynamicFormComponents },
+  components: { BaseTableComponents, BaseControlFieldComponents, BaseDynamicFormComponents },
   data() {
     return {
       loading: false,
@@ -109,10 +115,140 @@ export default {
         { value: '选项5', label: '北京烤鸭' }
       ],
       value: '',
-      model:[]
+      formModel: {
+        projectLevel: '',
+        system: [],
+        startDate: '',
+        endDate: '',
+        ccyyf: '',
+        yh: '',
+        dyhjz: '',
+        jzyzfs: '',
+        fileList: []
+      },
+      formFields: [
+        {
+          type: 'select',
+          key: 'projectLevel',
+          label: '项目级别',
+          placeholder: '请选择项目级别',
+          required: true,
+          rules: [
+            { required: true, message: '请选择项目级别', trigger: 'blur' },
+          ],
+          options: [
+            { label: '一级项目', value: '1' },
+            { label: '二级项目', value: '2' },
+            { label: '三级项目', value: '3' }
+          ]
+        },
+        {
+          type: 'select',
+          key: 'system',
+          label: '关联系统',
+          placeholder: '请选择关联系统',
+          multiple: true,
+          required: true,
+          rules: [
+            { required: true, message: '请选择关联系统', trigger: 'blur' },
+          ],
+          options: [
+            { label: '系统A', value: 'systemA' },
+            { label: '系统B', value: 'systemB' },
+            { label: '系统C', value: 'systemC' }
+          ]
+        },
+        {
+          type: 'slot',
+          key: 'endDate',
+          label: '周期时间',
+          required: false,
+        },
+        {
+          type: 'input',
+          key: 'ccyyf',
+          label: '产品运营方',
+          placeholder: '请填写产品运营方',
+          required: true,
+          rules: [
+            { required: true, message: '请填写产品运营方', trigger: 'blur' },
+          ],
+        },
+        {
+          type: 'input',
+          key: 'yh',
+          label: '用户',
+          placeholder: '请填写用户',
+          required: true,
+          rules: [
+            { required: true, message: '请填写用户', trigger: 'blur' },
+          ],
+        },
+        {
+          type: 'textarea',
+          key: 'dyhjz',
+          label: '对用户价值（研发目标）',
+          placeholder: '请输入对用户价值（研发目标）',
+          rows: 4,
+          maxlength: 200,
+          showWordLimit: true,
+          required: true,
+          rules: [
+            { required: true, message: '请输入对用户价值（研发目标）', trigger: 'blur' },
+          ],
+        },
+        {
+          type: 'textarea',
+          key: 'jzyzfs',
+          label: '价值验证方式',
+          placeholder: '请输入价值验证方式',
+          rows: 4,
+          maxlength: 200,
+          showWordLimit: true,
+          required: true,
+          rules: [
+            { required: true, message: '请输入价值验证方式', trigger: 'blur' },
+          ],
+        },
+        {
+          type: 'upload',
+          key: 'fileList',
+          label: '附件',
+          required: false,
+          rules: [
+            { required: false, message: '请上传文件', trigger: 'blur' },
+          ],
+          limit: 6,
+          options: []
+        },
+      ],
+      endDatePickerOptions: {
+        disabledDate: (time) => {
+          return GdProjectApplyEntity.getEndPikerOptions(this.formModel.startDate, time)
+        }
+      }
+
     }
   },
   methods: {
+
+    getEndPikerOptions(sDate, time) {
+      const today = new Date();
+      // 构造今天 00:00:00 的时间戳
+      const startOfToday = new Date(today.getFullYear(), today.getMonth(), today.getDate()).getTime();
+
+      // 小于今天 → 禁用（当天可以选）
+      if (time.getTime() < startOfToday) return true;
+
+      // 2. 不能选 <= 开始日期
+      if (sDate) {
+        const startDate = new Date(sDate);
+        const start = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate()).getTime();
+        if (time.getTime() < start) return true
+      }
+      return false
+    },
+
     handleCurrentChange(currentPage) {
       this.currentPage = currentPage
       // 重新获取数据
@@ -161,6 +297,20 @@ export default {
     deleteRow(row) {
       console.log('删除行:', row)
     },
+
+    handleSubmit(data) {
+      console.log('提交表单：', data)
+    },
+
+    handleReset() {
+      console.log('重置表单')
+    },
+
+    handleValidateError(errors) {
+      console.log('表单验证错误：', errors)
+    },
+
+
     fetchData() {
       this.loading = true
       // 模拟接口请求
