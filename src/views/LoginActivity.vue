@@ -31,15 +31,23 @@
         <el-button size="small" type="danger" @click="deleteRow(row)">删除</el-button>
       </template>
     </base-table-components>
+    <base-dynamic-form-components :fields="fields" :model="model" :rules="rules"
+      @submit="handleSubmit" @reset="handleReset">
+      <template #button>
+        <el-button type="primary" @click="handleSubmit">提交</el-button>
+        <el-button @click="handleReset">重置</el-button>
+      </template>
+    </base-dynamic-form-components>
   </div>
 </template>
 
 <script>
 import BaseTableComponents from '@/components/BaseTableComponents.vue'
 import BaseControlFieldComponents from '../components/BaseControlFieldComponents.vue';
+import BaseDynamicFormComponents from '../components/BaseDynamicFormComponents.vue';
 
 export default {
-  components: { BaseTableComponents, BaseControlFieldComponents },
+  components: { BaseTableComponents, BaseControlFieldComponents,BaseDynamicFormComponents },
   data() {
     return {
       loading: false,
@@ -100,7 +108,8 @@ export default {
         { value: '选项4', label: '龙须面' },
         { value: '选项5', label: '北京烤鸭' }
       ],
-      value: ''
+      value: '',
+      model:[]
     }
   },
   methods: {

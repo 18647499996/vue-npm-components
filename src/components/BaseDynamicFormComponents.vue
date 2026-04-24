@@ -80,7 +80,6 @@
 </template>
 
 <script>
-import { files } from 'jszip';
 
 export default {
   name: 'BaseDynamicFormComponents',

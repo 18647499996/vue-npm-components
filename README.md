@@ -18,7 +18,6 @@
 
 ### 1. 引入组件
 ```javascript
-import BaseTableComponents from 'liudonghan-components'; 
 // 或根据你的包结构导入
 import { BaseTableComponents,BaseDynamicFormComponents,BaseControlFieldComponents } from 'liudonghan-components';
 ```
