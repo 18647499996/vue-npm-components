@@ -4,7 +4,8 @@
 
       <div class="filter-item">
         <el-date-picker v-if="showRangePicker" v-model="localDateRange" :type="picker" start-placeholder="开始日期"
-          end-placeholder="结束日期" value-format="yyyy-MM-dd" @change="handleRangePickerChange" />
+          :placeholder="pickerPlaceholder" end-placeholder="结束日期" :value-format="valueFormat"
+          @change="handleRangePickerChange" />
         <slot name="picker"></slot>
       </div>
       <div class="select-item">
@@ -42,7 +43,9 @@ export default {
     // 日期相关
     showRangePicker: { type: Boolean, default: true },
     picker: { type: String, default: 'daterange' },
+    pickerPlaceholder: { type: String, default: '请选择日期' },
     dateValue: { type: Array, default: () => [] }, // 外部传入的日期绑定
+    valueFormat: { type: String, default: 'yyyy-MM-dd' }, // 日期格式
 
     // 下拉框配置
     selectArray: { type: Array, default: () => [] },
@@ -129,7 +132,7 @@ export default {
   margin-bottom: 8px;
 }
 
-.select-item{
+.select-item {
   margin-bottom: 8px;
 }
 

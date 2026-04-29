@@ -1,9 +1,9 @@
 <template>
   <div class="app-container">
-    <base-control-field-components :show-range-picker="true" :select-array="selectArray" :input="inputAttr"
-      show-export-btn show-create-btn @query="handleQuery" @create="handleCreate" @export="handleExport"
-      @handleSelectChange="handleSelectFilterChange" @handleInputChange="handleInputChange"
-      @handleRangePickerChange="handleRangePickerChange">
+    <base-control-field-components :show-range-picker="true" picker-placeholder="请选择多个日期" picker="months"
+      :date-value="dataValue" :select-array="selectArray" :input="inputAttr" show-export-btn show-create-btn
+      @query="handleQuery" @create="handleCreate" @export="handleExport" @handleSelectChange="handleSelectFilterChange"
+      @handleInputChange="handleInputChange" @handleRangePickerChange="handleRangePickerChange">
       <template #select>
         <el-select style="margin-right: 12px;" v-model="value" placeholder="请选择">
           <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
@@ -15,13 +15,12 @@
       </template>
     </base-control-field-components>
     <base-table-components :list="tableData" :loading="loading" :columns="columns" :current-page="currentPage"
-      :total="total" :pagination="pagination" :show-selection="true" :show-index="true" border
-      @current-change="handleCurrentChange" @size-change="handleSizeChange" @selection-change="handleSelectionChange"
-      @row-click="handleRowClick">
+      :total="total" :show-selection="true" :show-index="true" border @current-change="handleCurrentChange"
+      @size-change="handleSizeChange" @selection-change="handleSelectionChange" @row-click="handleRowClick">
       <!-- 自定义列插槽 -->
-      <template #status="{ row }">
-        <el-tag :type="row.status === 'active' ? 'success' : 'warning'">
-          {{ row.status === 'active' ? '启用' : '禁用' }}
+      <template #bodyCell="{ column, row, index }">
+        <el-tag :type="row.role === 'manager' ? 'success' : 'warning'">
+          {{ row.role === 'manager' ? '管理员' : '用户' }}
         </el-tag>
       </template>
 
@@ -56,9 +55,10 @@ export default {
   components: { BaseTableComponents, BaseControlFieldComponents, BaseDynamicFormComponents },
   data() {
     return {
+      dataValue: ['2026-01-01', '2026-02-01', '2026-03-01', '2026-04-01'],
       loading: false,
       currentPage: 1,
-      total: 100,
+      total: 20,
       selectArray: [
         {
           width: '150px',
@@ -81,6 +81,9 @@ export default {
           options: [
             { value: 0, label: '未处理' },
             { value: 1, label: '已处理' },
+            { value: 2, label: '待处理' },
+            { value: 3, label: '处理中' },
+            { value: 4, label: '紧急处理' }
           ]
         },
       ],
@@ -91,20 +94,39 @@ export default {
         show: true
       },
       tableData: [
-        { id: 1, name: '张三', age: 25, status: 'active', createTime: '2026-04-01' },
-        { id: 2, name: '李四', age: 30, status: 'inactive', createTime: '2026-04-02' },
-        { id: 3, name: '王五', age: 28, status: 'active', createTime: '2026-04-03' }
+        { id: 1, name: '张三', age: 25, status: 'active', role: 'admin', createTime: '2026-04-01', email: 'zhangsan@example.com', address: '北京市朝阳区' },
+        { id: 2, name: '李四', age: 30, status: 'inactive', role: 'user', createTime: '2026-04-02', email: 'lisi@example.com', address: '上海市浦东新区' },
+        { id: 3, name: '王五', age: 28, status: 'active', role: 'user', createTime: '2026-04-03', email: 'wangwu@example.com', address: '广州市天河区' },
+        { id: 4, name: '赵六', age: 35, status: 'active', role: 'manager', createTime: '2026-03-15', email: 'zhaoliu@example.com', address: '深圳市南山区' },
+        { id: 5, name: '孙七', age: 22, status: 'inactive', role: 'user', createTime: '2026-03-20', email: 'sunqi@example.com', address: '杭州市西湖区' },
+        { id: 6, name: '周八', age: 40, status: 'active', role: 'admin', createTime: '2026-04-10', email: 'zhouba@example.com', address: '成都市锦江区' },
+        { id: 7, name: '吴九', age: 27, status: 'active', role: 'user', createTime: '2026-04-12', email: 'wujiu@example.com', address: '武汉市武昌区' },
+        { id: 8, name: '郑十', age: 31, status: 'inactive', role: 'manager', createTime: '2026-02-28', email: 'zhengshi@example.com', address: '西安市雁塔区' },
+        { id: 9, name: '陈十一', age: 26, status: 'active', role: 'user', createTime: '2026-04-15', email: 'chen11@example.com', address: '重庆市渝中区' },
+        { id: 10, name: '林十二', age: 29, status: 'active', role: 'admin', createTime: '2026-04-18', email: 'lin12@example.com', address: '南京市玄武区' },
+        { id: 11, name: '韩梅梅', age: 24, status: 'inactive', role: 'user', createTime: '2026-01-05', email: 'hmm@example.com', address: '天津市和平区' },
+        { id: 12, name: '李雷', age: 24, status: 'active', role: 'user', createTime: '2026-01-06', email: 'lilei@example.com', address: '苏州市姑苏区' },
+        { id: 13, name: '刘能', age: 45, status: 'active', role: 'manager', createTime: '2026-03-25', email: 'liuneng@example.com', address: '沈阳市沈河区' },
+        { id: 14, name: '赵四', age: 42, status: 'inactive', role: 'user', createTime: '2026-03-26', email: 'zhaosi@example.com', address: '长春市朝阳区' },
+        { id: 15, name: '谢广坤', age: 48, status: 'active', role: 'admin', createTime: '2026-04-20', email: 'xgk@example.com', address: '哈尔滨市南岗区' },
+        { id: 16, name: '小沈阳', age: 33, status: 'active', role: 'user', createTime: '2026-04-21', email: 'xsy@example.com', address: '长沙市岳麓区' },
+        { id: 17, name: '宋小宝', age: 36, status: 'inactive', role: 'user', createTime: '2026-04-22', email: 'sxb@example.com', address: '福州市鼓楼区' },
+        { id: 18, name: '大鹏', age: 34, status: 'active', role: 'manager', createTime: '2026-04-23', email: 'dapeng@example.com', address: '厦门市思明区' },
+        { id: 19, name: '柳岩', age: 32, status: 'active', role: 'user', createTime: '2026-04-24', email: 'liuyan@example.com', address: '青岛市市南区' },
+        { id: 20, name: '马丽', age: 37, status: 'inactive', role: 'admin', createTime: '2026-04-24', email: 'mali@example.com', address: '大连市西岗区' }
       ],
       columns: [
         { prop: 'name', label: '姓名', },
         { prop: 'age', label: '年龄', width: '80', sortable: true },
-        { prop: 'status', label: '状态', width: '100', slot: 'status' },
+        { prop: 'email', label: '邮箱', },
+        { prop: 'address', label: '地址', },
+        { prop: 'role', label: '角色', width: '100', slot: 'role' },
         { prop: 'createTime', label: '创建时间', width: '180', sortable: true },
         { type: 'operation', label: '操作', width: '150', fixed: 'right' }
       ],
       pagination: {
-        pageSize: 10,
-        pageSizes: [10, 20, 50, 100],
+        pageSize: 5,
+        pageSizes: [5, 10, 20, 50, 100],
         layout: 'total, prev, pager, next, sizes'
       },
       options: [
@@ -224,7 +246,7 @@ export default {
       ],
       endDatePickerOptions: {
         disabledDate: (time) => {
-          return GdProjectApplyEntity.getEndPikerOptions(this.formModel.startDate, time)
+          return getEndPikerOptions(this.formModel.startDate, time)
         }
       }
 
@@ -277,8 +299,8 @@ export default {
       console.log('创建按钮')
     },
 
-    handleRangePickerChange(e, dateRange) {
-      console.log('选择日期范围：', e, dateRange)
+    handleRangePickerChange(e) {
+      console.log('选择日期范围：', e)
     },
 
     handleSelectFilterChange(e, index) {
