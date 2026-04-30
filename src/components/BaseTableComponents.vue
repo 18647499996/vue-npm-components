@@ -7,11 +7,11 @@
       :cell-class-name="cellClassName" :empty-text="emptyText" @row-click="handleRowClick"
       @sort-change="handleSortChange" @selection-change="handleSelectionChange">
       <!-- 多选列 -->
-      <el-table-column v-if="showSelection" type="selection" :width="selectionWidth"
+      <el-table-column v-if="showSelection" type="selection" :width="selectionWidth" align="center"
         :reserve-selection="reserveSelection" />
 
       <!-- 索引列 -->
-      <el-table-column v-if="showIndex" type="index" :width="indexWidth" :label="indexLabel" />
+      <el-table-column v-if="showIndex" type="index" :width="indexWidth" :label="indexLabel" align="center" />
 
       <!-- 自定义列 -->
       <template v-for="column in columns">

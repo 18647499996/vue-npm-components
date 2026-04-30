@@ -116,13 +116,13 @@ export default {
         { id: 20, name: '马丽', age: 37, status: 'inactive', role: 'admin', createTime: '2026-04-24', email: 'mali@example.com', address: '大连市西岗区' }
       ],
       columns: [
-        { prop: 'name', label: '姓名', },
-        { prop: 'age', label: '年龄', width: '80', sortable: true },
-        { prop: 'email', label: '邮箱', },
-        { prop: 'address', label: '地址', },
-        { prop: 'role', label: '角色', width: '100', slot: 'role' },
-        { prop: 'createTime', label: '创建时间', width: '180', sortable: true },
-        { type: 'operation', label: '操作', width: '150', fixed: 'right' }
+        { prop: 'name', label: '姓名', align: 'center' },
+        { prop: 'age', label: '年龄', width: '100', align: 'center', sortable: true },
+        { prop: 'email', label: '邮箱', align: 'center' },
+        { prop: 'address', label: '地址', align: 'center' },
+        { prop: 'role', label: '角色', width: '100', slot: 'role', align: 'center' },
+        { prop: 'createTime', label: '创建时间', sortable: true, align: 'center' },
+        { type: 'operation', label: '操作', width: '150', fixed: 'right', align: 'center' }
       ],
       pagination: {
         pageSize: 5,
