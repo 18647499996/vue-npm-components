@@ -35,7 +35,7 @@ import { BaseTableComponents,BaseDynamicFormComponents,BaseControlFieldComponent
     :loading="loading"
     @current-change="handlePageChange"
   >
-    <template #bodyCell="{ row, column }">
+    <template #bodyCell="{ column, row, index }">
       <template v-if="column === 'status'">
         <el-tag :type="row.status === 1 ? 'success' : 'danger'">
           {{ row.status === 1 ? '启用' : '禁用' }}
@@ -43,7 +43,7 @@ import { BaseTableComponents,BaseDynamicFormComponents,BaseControlFieldComponent
       </template>
     </template>
 
-    <template #operation="{ row }">
+    <template #operation="{ row, index }">
       <el-button type="text" @click="handleEdit(row)">编辑</el-button>
     </template>
   </base-table-components>
