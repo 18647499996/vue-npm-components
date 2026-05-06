@@ -15,10 +15,11 @@
 
       <!-- 自定义列 -->
       <template v-for="column in columns">
-        <el-table-column v-if="column.prop !== 'operation'" :prop="column.prop" :label="column.label"
-          :width="column.width" :min-width="column.minWidth" :fixed="column.fixed" :sortable="column.sortable"
-          :formatter="column.formatter" :show-overflow-tooltip="column.showOverflowTooltip" :align="column.align"
-          :header-align="column.headerAlign">
+        <el-table-column v-if="column.prop !== 'operation' && column.prop !== ''" :prop="column.prop"
+          :label="column.label" :width="column.width" :min-width="column.minWidth" :fixed="column.fixed"
+          :sortable="column.sortable" :formatter="column.formatter" :show-overflow-tooltip="column.showOverflowTooltip"
+          :align="column.align" :header-align="column.headerAlign">
+
 
           <!-- 列头（ 标题 ） -->
           <template #header="scope">
@@ -39,6 +40,16 @@
               {{ scope.row[column.prop] }}
             </template>
           </template>
+        </el-table-column>
+
+        <!-- 多级表头 -->
+        <el-table-column v-if="column.prop === ''" :prop="column.prop" :label="column.label" :width="column.width"
+          :min-width="column.minWidth" :fixed="column.fixed" :sortable="column.sortable" :formatter="column.formatter"
+          :show-overflow-tooltip="column.showOverflowTooltip" :align="column.align" :header-align="column.headerAlign">
+          <el-table-column v-for="child in column.children" :prop="child.prop" :label="child.label" :width="child.width"
+            :min-width="child.minWidth" :fixed="child.fixed" :sortable="child.sortable" :formatter="child.formatter"
+            :show-overflow-tooltip="child.showOverflowTooltip" :align="child.align" :header-align="child.headerAlign">
+          </el-table-column>
         </el-table-column>
 
         <!-- 操作列 -->

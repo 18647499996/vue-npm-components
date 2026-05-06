@@ -3,13 +3,13 @@
     <el-row type="flex" align="middle" class="control-row">
 
       <div class="filter-item">
-        <el-date-picker v-if="showRangePicker" v-model="localDateRange" :type="picker" start-placeholder="开始日期"
+        <el-date-picker :size="size" v-if="showRangePicker" v-model="localDateRange" :type="picker" start-placeholder="开始日期"
           :placeholder="pickerPlaceholder" end-placeholder="结束日期" :value-format="valueFormat"
           @change="handleRangePickerChange" />
         <slot name="picker"></slot>
       </div>
       <div class="select-item">
-        <el-select style="margin-right: 12px;" v-for="(item, index) in localSelectArray" :key="'select-' + index"
+        <el-select :size="size" style="margin-right: 12px;" v-for="(item, index) in localSelectArray" :key="'select-' + index"
           v-model="item.value" v-show="item.hide !== false" :style="{ width: item.width || '150px' }"
           :placeholder="item.placeholder" :clearable="item.allowClear !== false" :disabled="item.disabled" filterable
           @change="(val) => handleSelectChange(val, index)">
@@ -19,16 +19,17 @@
       </div>
 
 
-      <el-input v-if="input.show !== false" v-model="localInputValue" :placeholder="input.placeholder || '请输入关键字'"
-        class="filter-item" :style="{ width: input.width || '240px' }" clearable
-        @keyup.enter.native="onClickListenerQuery" @input="handleInputChange" />
+      <el-input :size="size" v-if="input.show !== false" v-model="localInputValue"
+        :placeholder="input.placeholder || '请输入关键字'" class="filter-item" :style="{ width: input.width || '240px' }"
+        clearable @keyup.enter.native="onClickListenerQuery" @input="handleInputChange" />
 
       <div class="button-group">
-        <el-button v-if="showQueryBtn" type="primary" icon="el-icon-search" @click="onClickListenerQuery">查询</el-button>
-        <el-button v-if="showCreateBtn" type="danger" icon="el-icon-plus" @click="onClickListenerCreate">
+        <el-button :size="size" v-if="showQueryBtn" type="primary" icon="el-icon-search"
+          @click="onClickListenerQuery">查询</el-button>
+        <el-button :size="size" v-if="showCreateBtn" type="danger" icon="el-icon-plus" @click="onClickListenerCreate">
           {{ createBtnPlaceholder }}
         </el-button>
-        <el-button v-if="showExportBtn" type="warning" icon="el-icon-download"
+        <el-button :size="size" v-if="showExportBtn" type="warning" icon="el-icon-download"
           @click="onClickListenerExport">导出</el-button>
         <slot name="button"></slot>
       </div>
@@ -60,7 +61,13 @@ export default {
     showQueryBtn: { type: Boolean, default: true },
     showCreateBtn: { type: Boolean, default: false },
     showExportBtn: { type: Boolean, default: false },
-    createBtnPlaceholder: { type: String, default: '新增' }
+    createBtnPlaceholder: { type: String, default: '新增' },
+    // 尺寸
+    size: {
+      type: String,
+      default: 'large',
+      validator: (value) => ['large', 'medium', 'small', 'mini'].includes(value)
+    },
   },
   data() {
     return {
@@ -137,7 +144,7 @@ export default {
 }
 
 .button-group {
-  display: flex;
+  /* display: flex; */
   margin-bottom: 8px;
 }
 

@@ -3,15 +3,15 @@
     <base-control-field-components :show-range-picker="true" picker-placeholder="请选择多个日期" picker="months"
       :date-value="dataValue" :select-array="selectArray" :input="inputAttr" show-export-btn show-create-btn
       @query="handleQuery" @create="handleCreate" @export="handleExport" @handleSelectChange="handleSelectFilterChange"
-      @handleInputChange="handleInputChange" @handleRangePickerChange="handleRangePickerChange">
+      @handleInputChange="handleInputChange" @handleRangePickerChange="handleRangePickerChange" size="medium">
       <template #select>
-        <el-select style="margin-right: 12px;" v-model="value" placeholder="请选择">
+        <el-select size="medium" style="margin-right: 12px;" v-model="value" placeholder="请选择">
           <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
           </el-option>
         </el-select>
       </template>
-      <template #button>
-        <el-button type="warning" icon="el-icon-download">自定义按钮</el-button>
+      <template  #button>
+        <el-button size="medium" type="warning" icon="el-icon-download">自定义按钮</el-button>
       </template>
     </base-control-field-components>
     <base-table-components :list="tableData" :loading="loading" :columns="columns" :current-page="currentPage"
@@ -100,29 +100,36 @@ export default {
         { id: 4, name: '赵六', age: 35, status: 'active', role: 'manager', createTime: '2026-03-15', email: 'zhaoliu@example.com', address: '深圳市南山区' },
         { id: 5, name: '孙七', age: 22, status: 'inactive', role: 'user', createTime: '2026-03-20', email: 'sunqi@example.com', address: '杭州市西湖区' },
         { id: 6, name: '周八', age: 40, status: 'active', role: 'admin', createTime: '2026-04-10', email: 'zhouba@example.com', address: '成都市锦江区' },
-        { id: 7, name: '吴九', age: 27, status: 'active', role: 'user', createTime: '2026-04-12', email: 'wujiu@example.com', address: '武汉市武昌区' },
-        { id: 8, name: '郑十', age: 31, status: 'inactive', role: 'manager', createTime: '2026-02-28', email: 'zhengshi@example.com', address: '西安市雁塔区' },
-        { id: 9, name: '陈十一', age: 26, status: 'active', role: 'user', createTime: '2026-04-15', email: 'chen11@example.com', address: '重庆市渝中区' },
-        { id: 10, name: '林十二', age: 29, status: 'active', role: 'admin', createTime: '2026-04-18', email: 'lin12@example.com', address: '南京市玄武区' },
-        { id: 11, name: '韩梅梅', age: 24, status: 'inactive', role: 'user', createTime: '2026-01-05', email: 'hmm@example.com', address: '天津市和平区' },
-        { id: 12, name: '李雷', age: 24, status: 'active', role: 'user', createTime: '2026-01-06', email: 'lilei@example.com', address: '苏州市姑苏区' },
-        { id: 13, name: '刘能', age: 45, status: 'active', role: 'manager', createTime: '2026-03-25', email: 'liuneng@example.com', address: '沈阳市沈河区' },
-        { id: 14, name: '赵四', age: 42, status: 'inactive', role: 'user', createTime: '2026-03-26', email: 'zhaosi@example.com', address: '长春市朝阳区' },
-        { id: 15, name: '谢广坤', age: 48, status: 'active', role: 'admin', createTime: '2026-04-20', email: 'xgk@example.com', address: '哈尔滨市南岗区' },
-        { id: 16, name: '小沈阳', age: 33, status: 'active', role: 'user', createTime: '2026-04-21', email: 'xsy@example.com', address: '长沙市岳麓区' },
-        { id: 17, name: '宋小宝', age: 36, status: 'inactive', role: 'user', createTime: '2026-04-22', email: 'sxb@example.com', address: '福州市鼓楼区' },
-        { id: 18, name: '大鹏', age: 34, status: 'active', role: 'manager', createTime: '2026-04-23', email: 'dapeng@example.com', address: '厦门市思明区' },
-        { id: 19, name: '柳岩', age: 32, status: 'active', role: 'user', createTime: '2026-04-24', email: 'liuyan@example.com', address: '青岛市市南区' },
-        { id: 20, name: '马丽', age: 37, status: 'inactive', role: 'admin', createTime: '2026-04-24', email: 'mali@example.com', address: '大连市西岗区' }
+        { id: 7, name: '吴九', age: 27, status: 'active', role: 'user', createTime: '2026-04-12', email: 'wujiu@example.com', address: '武汉市武昌区', number: 100, price: 1000 },
+        { id: 8, name: '郑十', age: 31, status: 'inactive', role: 'manager', createTime: '2026-02-28', email: 'zhengshi@example.com', address: '西安市雁塔区', number: 100, price: 1000 },
+        { id: 9, name: '陈十一', age: 26, status: 'active', role: 'user', createTime: '2026-04-15', email: 'chen11@example.com', address: '重庆市渝中区', number: 100, price: 1000 },
+        { id: 10, name: '林十二', age: 29, status: 'active', role: 'admin', createTime: '2026-04-18', email: 'lin12@example.com', address: '南京市玄武区', number: 100, price: 1000 },
+        { id: 11, name: '韩梅梅', age: 24, status: 'inactive', role: 'user', createTime: '2026-01-05', email: 'hmm@example.com', address: '天津市和平区', number: 100, price: 1000 },
+        { id: 12, name: '李雷', age: 24, status: 'active', role: 'user', createTime: '2026-01-06', email: 'lilei@example.com', address: '苏州市姑苏区', number: 100, price: 1000 },
+        { id: 13, name: '刘能', age: 45, status: 'active', role: 'manager', createTime: '2026-03-25', email: 'liuneng@example.com', address: '沈阳市沈河区', number: 100, price: 1000 },
+        { id: 14, name: '赵四', age: 42, status: 'inactive', role: 'user', createTime: '2026-03-26', email: 'zhaosi@example.com', address: '长春市朝阳区', number: 100, price: 1000 },
+        { id: 15, name: '谢广坤', age: 48, status: 'active', role: 'admin', createTime: '2026-04-20', email: 'xgk@example.com', address: '哈尔滨市南岗区', number: 100, price: 1000 },
+        { id: 16, name: '小沈阳', age: 33, status: 'active', role: 'user', createTime: '2026-04-21', email: 'xsy@example.com', address: '长沙市岳麓区', number: 100, price: 1000 },
+        { id: 17, name: '宋小宝', age: 36, status: 'inactive', role: 'user', createTime: '2026-04-22', email: 'sxb@example.com', address: '福州市鼓楼区', number: 100, price: 1000 },
+        { id: 18, name: '大鹏', age: 34, status: 'active', role: 'manager', createTime: '2026-04-23', email: 'dapeng@example.com', address: '厦门市思明区', number: 100, price: 1000 },
+        { id: 19, name: '柳岩', age: 32, status: 'active', role: 'user', createTime: '2026-04-24', email: 'liuyan@example.com', address: '青岛市市南区', number: 100, price: 1000 },
+        { id: 20, name: '马丽', age: 37, status: 'inactive', role: 'admin', createTime: '2026-04-24', email: 'mali@example.com', address: '大连市西岗区', number: 100, price: 1000 }
       ],
       columns: [
         { prop: 'name', label: '姓名', align: 'center' },
         { prop: 'age', label: '年龄', width: '100', align: 'center', sortable: true },
         { prop: 'email', label: '邮箱', align: 'center' },
         { prop: 'address', label: '地址', align: 'center' },
-        { prop: 'role', label: '角色', width: '100', slot: 'role', align: 'center' },
+        {
+          prop: '', label: '角色', width: '100', align: 'center',
+          children: [
+            { prop: 'role', label: '调用量', align: 'center' },
+            { prop: 'number', label: '最终付款次数', align: 'center' },
+            { prop: 'price', label: '单价', align: 'center' }
+          ]
+        },
         { prop: 'createTime', label: '创建时间', sortable: true, align: 'center' },
-        { type: 'operation', label: '操作', width: '150', fixed: 'right', align: 'center' }
+        { prop: 'operation', label: '操作', width: '150', fixed: 'right', align: 'center' }
       ],
       pagination: {
         pageSize: 5,
