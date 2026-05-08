@@ -3,15 +3,16 @@
     <el-row type="flex" align="middle" class="control-row">
 
       <div class="filter-item" v-if="showRangePicker">
-        <el-date-picker :size="size"  v-model="localDateRange" :type="picker" start-placeholder="开始日期"
+        <el-date-picker :size="size" v-model="localDateRange" :type="picker" start-placeholder="开始日期"
           :placeholder="pickerPlaceholder" end-placeholder="结束日期" :value-format="valueFormat"
           @change="handleRangePickerChange" />
         <slot name="picker"></slot>
       </div>
       <div class="select-item">
-        <el-select :size="size" style="margin-right: 12px;" v-for="(item, index) in localSelectArray" :key="'select-' + index"
-          v-model="item.value" v-show="item.hide !== false" :style="{ width: item.width || '150px' }"
-          :placeholder="item.placeholder" :clearable="item.allowClear !== false" :disabled="item.disabled" filterable
+        <el-select :size="size" style="margin-right: 12px;" v-for="(item, index) in localSelectArray"
+          :key="'select-' + index" v-model="item.value" v-show="item.hide !== false"
+          :style="{ width: item.width || '150px' }" :placeholder="item.placeholder"
+          :clearable="item.allowClear !== false" :disabled="item.disabled" filterable
           @change="(val) => handleSelectChange(val, index)">
           <el-option v-for="opt in item.options" :key="opt.value" :label="opt.label" :value="opt.value" />
         </el-select>
@@ -144,7 +145,8 @@ export default {
 }
 
 .button-group {
-  /* display: flex; */
+  display: flex;
+  align-items: center;
   margin-bottom: 8px;
 }
 

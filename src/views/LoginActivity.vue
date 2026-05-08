@@ -10,8 +10,17 @@
           </el-option>
         </el-select>
       </template>
-      <template  #button>
+      <template #button>
+        <el-upload action="" :on-change="fileHandleChange" :file-list="fileListUpload" :show-file-list="false"
+          accept=".xls,.xlsx" :auto-upload="false" :limit="1">
+          <el-button :loading="disbtn" size="small" type="danger">导入</el-button>
+        </el-upload>
         <el-button size="medium" type="warning" icon="el-icon-download">自定义按钮</el-button>
+
+        <el-button type="success" size="small" @click="doDown">下载模板</el-button>
+        <el-button type="info" size="small">批量写入</el-button>
+        <el-button type="info" size="small">全部写入</el-button>
+
       </template>
     </base-control-field-components>
     <base-table-components :list="tableData" :loading="loading" :columns="columns" :current-page="currentPage"
