@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <base-control-field-components :show-range-picker="true" picker-placeholder="请选择多个日期" picker="months"
+    <base-control-field-components :show-range-picker="show" picker-placeholder="请选择多个日期" picker="months"
       :date-value="dataValue" :select-array="selectArray" :input="inputAttr" show-export-btn show-create-btn
       @query="handleQuery" @create="handleCreate" @export="handleExport" @handleSelectChange="handleSelectFilterChange"
       @handleInputChange="handleInputChange" @handleRangePickerChange="handleRangePickerChange" size="medium">
@@ -210,7 +210,7 @@ export default {
           placeholder: '请填写用户',
           required: true,
           rules: [
-            { required: true, message: '请填写用户', trigger: 'blur' },
+            { required: true, message: '请填写用户1111', trigger: 'blur' },
           ],
         },
         {

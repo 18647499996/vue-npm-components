@@ -2,8 +2,8 @@
   <div class="base-control-container">
     <el-row type="flex" align="middle" class="control-row">
 
-      <div class="filter-item">
-        <el-date-picker :size="size" v-if="showRangePicker" v-model="localDateRange" :type="picker" start-placeholder="开始日期"
+      <div class="filter-item" v-if="showRangePicker">
+        <el-date-picker :size="size"  v-model="localDateRange" :type="picker" start-placeholder="开始日期"
           :placeholder="pickerPlaceholder" end-placeholder="结束日期" :value-format="valueFormat"
           @change="handleRangePickerChange" />
         <slot name="picker"></slot>
