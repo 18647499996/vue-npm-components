@@ -10,7 +10,8 @@
       </div>
       <div class="select-item">
         <el-select :size="size" style="margin-right: 12px;" v-for="(item, index) in localSelectArray"
-          :key="'select-' + index" v-model="item.value" v-show="item.hide !== false"
+          :key="'select-' + index" v-model="item.value" v-show="item.hide !== false" :multiple="item.multiple"
+          :collapse-tags="item.tags"
           :style="{ width: item.width || '150px' }" :placeholder="item.placeholder"
           :clearable="item.allowClear !== false" :disabled="item.disabled" filterable
           @change="(val) => handleSelectChange(val, index)">

@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <base-control-field-components :show-range-picker="show" picker-placeholder="请选择多个日期" picker="months"
+    <base-control-field-components :show-range-picker="show" picker-placeholder="请选择多个日期" picker="months" value-format="yyyy-MM"
       :date-value="dataValue" :select-array="selectArray" :input="inputAttr" show-export-btn show-create-btn
       @query="handleQuery" @create="handleCreate" @export="handleExport" @handleSelectChange="handleSelectFilterChange"
       @handleInputChange="handleInputChange" @handleRangePickerChange="handleRangePickerChange" size="medium">
@@ -87,6 +87,8 @@ export default {
           allowClear: true,
           value: undefined,
           hide: true,
+          multiple: true,
+          tags: true,
           options: [
             { value: 0, label: '未处理' },
             { value: 1, label: '已处理' },
