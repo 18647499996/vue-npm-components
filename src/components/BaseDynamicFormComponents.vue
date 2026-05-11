@@ -78,6 +78,9 @@
       <el-button v-if="showResetBtn" @click="handleReset" :disabled="loading">
         重置
       </el-button>
+      <el-button v-if="showCancelBtn" type="danger" @click="handleCancel">
+        {{ cancelBtnText }}
+      </el-button>
       <el-button v-if="showSubmitBtn" type="primary" @click="handleSubmit" :loading="loading">
         {{ submitBtnText }}
       </el-button>
@@ -146,14 +149,21 @@ export default {
       type: String,
       default: '提交'
     },
-    // 加载状态
-    loading: {
+    // 是否显示取消按钮
+    showCancelBtn: {
       type: Boolean,
-      default: false
-    }
+      default: true
+    },
+    // 取消按钮文本
+    cancelBtnText: {
+      type: String,
+      default: '取消'
+    },
   },
   data() {
-    return {}
+    return {
+      loading: false
+    }
   },
   watch: {
     fields: {
@@ -178,6 +188,10 @@ export default {
           }
         })
       })
+    },
+
+    handleCancel() {
+      this.$emit('cancel')
     },
 
     // 提交表单
