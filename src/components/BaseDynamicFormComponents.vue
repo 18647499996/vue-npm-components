@@ -6,7 +6,10 @@
       <el-form-item v-if="field.type === 'input'" :label="field.label" :prop="field.key" :rules="field.rules">
         <el-input v-model="model[field.key]" :placeholder="field.placeholder" :disabled="field.disabled"
           :clearable="field.clearable !== false" :type="field.inputType || 'text'" :maxlength="field.maxlength"
-          :show-word-limit="field.showWordLimit" :style="{ width: field.width || '60%' }" />
+          :show-word-limit="field.showWordLimit" :style="{ width: field.width || '60%' }">
+          <template v-if="field.prepend !== undefined" slot="prepend">{{ field.prepend }}</template>
+          <template v-if="field.append !== undefined" slot="append">{{ field.append }}</template>
+        </el-input>
       </el-form-item>
 
       <!-- 下拉选择框 -->
@@ -52,12 +55,15 @@
 
       <!-- 上传文件 -->
       <el-form-item v-else-if="field.type === 'upload'" :label="field.label" :prop="field.key" :rules="field.rules">
-        <el-upload class="upload-demo" :on-change="(file) => { handleFileChange(file, model, field.key) }"
+        <el-upload :drag="field.drag" class="upload-demo"
+          :on-change="(file) => { handleFileChange(file, model, field.key) }"
           :on-remove="(file, fileList) => { handleFileRemove(file, model, field.key) }" action="123"
           :auto-upload="false" :before-remove="beforeRemove" multiple :limit="field.limit || 6"
           :on-exceed="handleExceed" :file-list="model[field.key]">
-          <el-button size="small" type="primary" plain>点击上传</el-button>
-          <div slot="tip" class="el-upload__tip">上传附件，且不超过5M</div>
+          <el-button v-if="!field.drag" size="small" type="primary" plain>点击上传</el-button>
+          <div v-if="!field.drag" slot="tip" class="el-upload__tip">上传附件，且不超过5M</div>
+          <i v-if="field.drag" class="el-icon-upload"></i>
+          <div v-if="field.drag" class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
         </el-upload>
       </el-form-item>
 

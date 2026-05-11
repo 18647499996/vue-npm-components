@@ -209,7 +209,10 @@ export default {
           key: 'ccyyf',
           label: '产品运营方',
           placeholder: '请填写产品运营方',
+          prepend: 'Http://',
+          append: '.com',
           required: true,
+          disabled: true,
           rules: [
             { required: true, message: '请填写产品运营方', trigger: 'blur' },
           ],
@@ -255,6 +258,7 @@ export default {
           key: 'fileList',
           label: '附件',
           required: false,
+          drag: true,
           rules: [
             { required: false, message: '请上传文件', trigger: 'blur' },
           ],
