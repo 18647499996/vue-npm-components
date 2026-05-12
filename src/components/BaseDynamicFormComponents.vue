@@ -12,6 +12,17 @@
         </el-input>
       </el-form-item>
 
+      <!-- 单选选择框 -->
+      <el-form-item v-else-if="field.type === 'radio'" :label="field.label" :prop="field.key" :rules="field.rules">
+        <el-radio-group v-model="model[field.key]" :placeholder="field.placeholder" :disabled="field.disabled"
+          :style="{ width: field.width || '50%' }" @change="(e) => { handleRadioChange(e, field, index) }">
+          <el-radio v-for="option in field.options" :key="option.value" :label="option.value"
+            :disabled="option.disabled">
+            {{ option.label }}
+          </el-radio>
+        </el-radio-group>
+      </el-form-item>
+
       <!-- 下拉选择框 -->
       <el-form-item v-else-if="field.type === 'select'" :label="field.label" :prop="field.key" :rules="field.rules">
         <el-select v-model="model[field.key]" :placeholder="field.placeholder" :disabled="field.disabled"
@@ -218,7 +229,18 @@ export default {
       this.$emit('handleSelectChange', e, field, object, index)
     },
 
-    handleFileChange(file, dataModel, key) {
+    /**
+     * 单选框change事件
+     * @param {*} e 选择数据
+     * @param {*} field 表单字段
+     * @param {*} index 索引
+     */
+    handleRadioChange(e, field, index) {
+      const object = field.options.find(item => item.value == e)
+      this.$emit('handleRadioChange', e, field, object, index)
+    },
+
+       handleFileChange(file, dataModel, key) {
       console.log('选择文件：', file);
       dataModel[key].push(file.raw)
     },

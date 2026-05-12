@@ -156,8 +156,8 @@ export default {
       ],
       value: '',
       formModel: {
-        projectLevel: '',
-        system: [],
+        projectLevel: '1',
+        dataType: 'systemB',
         startDate: '',
         endDate: '',
         ccyyf: '',
@@ -183,14 +183,14 @@ export default {
           ]
         },
         {
-          type: 'select',
-          key: 'system',
-          label: '关联系统',
-          placeholder: '请选择关联系统',
+          type: 'radio',
+          key: 'dataType',
+          label: '数据类型',
+          placeholder: '请选择数据类型',
           multiple: true,
           required: true,
           rules: [
-            { required: true, message: '请选择关联系统', trigger: 'blur' },
+            { required: true, message: '请选择数据类型', trigger: 'blur' },
           ],
           options: [
             { label: '系统A', value: 'systemA' },
@@ -212,7 +212,6 @@ export default {
           prepend: 'Http://',
           append: '.com',
           required: true,
-          disabled: true,
           rules: [
             { required: true, message: '请填写产品运营方', trigger: 'blur' },
           ],
