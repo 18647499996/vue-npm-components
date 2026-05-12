@@ -36,7 +36,8 @@
       <el-form-item v-else-if="field.type === 'date'" :label="field.label" :prop="field.key" :rules="field.rules">
         <el-date-picker v-model="model[field.key]" :type="field.dateType || 'date'" :placeholder="field.placeholder"
           :disabled="field.disabled" :clearable="field.clearable !== false" :format="field.format"
-          :value-format="field.valueFormat" />
+          :value-format="field.valueFormat" range-separator="至" :start-placeholder="field.startPlaceholder || '开始日期'"
+          :end-placeholder="field.endPlaceholder || '结束日期'" />
       </el-form-item>
 
       <!-- 复选框 -->
@@ -240,7 +241,7 @@ export default {
       this.$emit('handleRadioChange', e, field, object, index)
     },
 
-       handleFileChange(file, dataModel, key) {
+    handleFileChange(file, dataModel, key) {
       console.log('选择文件：', file);
       dataModel[key].push(file.raw)
     },

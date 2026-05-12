@@ -11,7 +11,7 @@
         </el-select>
       </template>
       <template #button>
-        <el-upload action="" :on-change="fileHandleChange" :file-list="formModel.Model.fileList" :show-file-list="false"
+        <el-upload action="" :on-change="fileHandleChange" :file-list="formModel.fileList" :show-file-list="false"
           accept=".xls,.xlsx" :auto-upload="false" :limit="1">
           <el-button size="small" type="danger">导入</el-button>
         </el-upload>
@@ -199,6 +199,17 @@ export default {
           ]
         },
         {
+          type: 'date',
+          key: 'dataType',
+          label: '时间范围',
+          placeholder: '请选择时间范围',
+          dateType: 'daterange',
+          required: true,
+          rules: [
+            { required: true, message: '请选择时间范围', trigger: 'blur' },
+          ],
+        },
+        {
           type: 'slot',
           key: 'endDate',
           label: '周期时间',
@@ -267,7 +278,7 @@ export default {
       ],
       endDatePickerOptions: {
         disabledDate: (time) => {
-          return getEndPikerOptions(this.formModel.startDate, time)
+          return this.getEndPikerOptions(this.formModel.startDate, time)
         }
       },
       rules: {},
