@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <base-control-field-components :show-range-picker="show" picker-placeholder="请选择多个日期" picker="months" value-format="yyyy-MM"
+    <base-control-field-components picker-placeholder="请选择多个日期" picker="months" value-format="yyyy-MM"
       :date-value="dataValue" :select-array="selectArray" :input="inputAttr" show-export-btn show-create-btn
       @query="handleQuery" @create="handleCreate" @export="handleExport" @handleSelectChange="handleSelectFilterChange"
       @handleInputChange="handleInputChange" @handleRangePickerChange="handleRangePickerChange" size="medium">
@@ -11,13 +11,13 @@
         </el-select>
       </template>
       <template #button>
-        <el-upload action="" :on-change="fileHandleChange" :file-list="fileListUpload" :show-file-list="false"
+        <el-upload action="" :on-change="fileHandleChange" :file-list="formModel.Model.fileList" :show-file-list="false"
           accept=".xls,.xlsx" :auto-upload="false" :limit="1">
-          <el-button :loading="disbtn" size="small" type="danger">导入</el-button>
+          <el-button size="small" type="danger">导入</el-button>
         </el-upload>
         <el-button size="medium" type="warning" icon="el-icon-download">自定义按钮</el-button>
 
-        <el-button type="success" size="small" @click="doDown">下载模板</el-button>
+        <el-button type="success" size="small">下载模板</el-button>
         <el-button type="info" size="small">批量写入</el-button>
         <el-button type="info" size="small">全部写入</el-button>
 
@@ -270,8 +270,8 @@ export default {
         disabledDate: (time) => {
           return getEndPikerOptions(this.formModel.startDate, time)
         }
-      }
-
+      },
+      rules: {},
     }
   },
   methods: {
@@ -352,6 +352,10 @@ export default {
 
     handleValidateError(errors) {
       console.log('表单验证错误：', errors)
+    },
+
+    fileHandleChange(file) {
+      console.log('文件上传', file)
     },
 
 
