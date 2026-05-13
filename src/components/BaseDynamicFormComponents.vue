@@ -189,6 +189,10 @@ export default {
   },
   methods: {
 
+    resetLoading() {
+      this.loading = false
+    },
+
     // 表单验证
     validate() {
       return new Promise((resolve, reject) => {
