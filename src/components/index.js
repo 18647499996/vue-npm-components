@@ -1,8 +1,11 @@
 import BaseTableComponents from './BaseTableComponents.vue';
 import BaseControlFieldComponents from './BaseControlFieldComponents.vue';
 import BaseDynamicFormComponents from './BaseDynamicFormComponents.vue';
+import BaseElectronicSigner from './BaseElectronicSigner.vue';
+import BaseElectronicSignature from './BaseElectronicSignature.vue';
 
-const components = [BaseControlFieldComponents, BaseDynamicFormComponents, BaseTableComponents];
+
+const components = [BaseControlFieldComponents, BaseDynamicFormComponents, BaseTableComponents, BaseElectronicSigner, BaseElectronicSignature];
 
 // 1. 定义插件对象
 const install = (app) => { // Vue 3 环境建议写 app
@@ -15,7 +18,9 @@ const install = (app) => { // Vue 3 环境建议写 app
 export {
   BaseTableComponents,
   BaseControlFieldComponents,
-  BaseDynamicFormComponents
+  BaseDynamicFormComponents,
+  BaseElectronicSigner,
+  BaseElectronicSignature
 };
 
 // 3. 默认导出插件（支持 Vue.use）
