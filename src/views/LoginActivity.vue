@@ -5,7 +5,7 @@
       @query="handleQuery" @create="handleCreate" @export="handleExport" @handleSelectChange="handleSelectFilterChange"
       @handleInputChange="handleInputChange" @handleRangePickerChange="handleRangePickerChange" size="medium">
       <template #select>
-        <el-select size="medium" style="margin-right: 12px;" v-model="value" placeholder="请选择">
+        <el-select size="small" style="margin-right: 12px;" v-model="value" placeholder="请选择">
           <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
           </el-option>
         </el-select>
@@ -15,6 +15,7 @@
           accept=".xls,.xlsx" :auto-upload="false" :limit="1">
           <el-button size="small" type="danger">导入</el-button>
         </el-upload>
+        
         <el-button size="medium" type="warning" icon="el-icon-download">自定义按钮</el-button>
 
         <el-button type="success" size="small">下载模板</el-button>
@@ -39,19 +40,21 @@
         <el-button size="small" type="danger" @click="deleteRow(row)">删除</el-button>
       </template>
     </base-table-components>
-    <base-dynamic-form-components style="margin-left: 50px;margin-right: 50px;" :fields="formFields" :model="formModel"
-      :rules="rules" @submit="handleSubmit" @reset="handleReset" @validate-error="handleValidateError">
-      <!-- 自定义插槽 -->
-      <template #endDate="{ field, form }">
-        <el-date-picker v-model="form.startDate" type="date" placeholder="开始日期" value-format="yyyy-MM-dd"
-          style="width: 150px;">
-        </el-date-picker>
-        <span style="margin-left: 12px;margin-right: 12px;">至</span>
-        <el-date-picker v-model="form.endDate" type="date" placeholder="结束日期" value-format="yyyy-MM-dd"
-          style="width: 150px;" :disabled="form.startDate == null" :picker-options="endDatePickerOptions">
-        </el-date-picker>
-      </template>
-    </base-dynamic-form-components>
+    <el-row type="flex" style="justify-content: center;">
+      <base-dynamic-form-components style=" width: 80%; " :fields="formFields" :model="formModel" :rules="rules"
+        @submit="handleSubmit" @reset="handleReset" @validate-error="handleValidateError">
+        <!-- 自定义插槽 -->
+        <template #endDate="{ field, form }">
+          <el-date-picker v-model="form.startDate" type="date" placeholder="开始日期" value-format="yyyy-MM-dd"
+            style="width: 150px;">
+          </el-date-picker>
+          <span style="margin-left: 12px;margin-right: 12px;">至</span>
+          <el-date-picker v-model="form.endDate" type="date" placeholder="结束日期" value-format="yyyy-MM-dd"
+            style="width: 150px;" :disabled="form.startDate == null" :picker-options="endDatePickerOptions">
+          </el-date-picker>
+        </template>
+      </base-dynamic-form-components>
+    </el-row>
   </div>
 </template>
 
@@ -173,6 +176,7 @@ export default {
           label: '项目级别',
           placeholder: '请选择项目级别',
           required: true,
+          span: 12,
           rules: [
             { required: true, message: '请选择项目级别', trigger: 'blur' },
           ],
@@ -187,8 +191,8 @@ export default {
           key: 'dataType',
           label: '数据类型',
           placeholder: '请选择数据类型',
-          multiple: true,
           required: true,
+          span: 12,
           rules: [
             { required: true, message: '请选择数据类型', trigger: 'blur' },
           ],

@@ -1,88 +1,85 @@
 <template>
   <el-form ref="dynamicForm" :model="model" :rules="rules" :label-width="labelWidth" :inline="inline" :size="size"
     :label-position="labelPosition" @submit.prevent="handleSubmit">
-    <template v-for="(field, index) in fields">
-      <!-- 输入框 -->
-      <el-form-item v-if="field.type === 'input'" :label="field.label" :prop="field.key" :rules="field.rules">
-        <el-input v-model="model[field.key]" :placeholder="field.placeholder" :disabled="field.disabled"
-          :clearable="field.clearable !== false" :type="field.inputType || 'text'" :maxlength="field.maxlength"
-          :show-word-limit="field.showWordLimit" :style="{ width: field.width || '60%' }">
-          <template v-if="field.prepend !== undefined" slot="prepend">{{ field.prepend }}</template>
-          <template v-if="field.append !== undefined" slot="append">{{ field.append }}</template>
-        </el-input>
-      </el-form-item>
+    <template>
+      <el-row :gutter="20">
+        <el-col :span="field.span || 24" v-for="(field, index) in fields">
+          <!-- 输入框 -->
+          <el-form-item v-if="field.type === 'input'" :label="field.label" :prop="field.key" :rules="field.rules">
+            <el-input v-model="model[field.key]" :placeholder="field.placeholder" :disabled="field.disabled"
+              :clearable="field.clearable !== false" :type="field.inputType || 'text'" :maxlength="field.maxlength"
+              :show-word-limit="field.showWordLimit" :style="{ width: field.width || '100%' }">
+              <template v-if="field.prepend !== undefined" slot="prepend">{{ field.prepend }}</template>
+              <template v-if="field.append !== undefined" slot="append">{{ field.append }}</template>
+            </el-input>
+          </el-form-item>
 
-      <!-- 单选选择框 -->
-      <el-form-item v-else-if="field.type === 'radio'" :label="field.label" :prop="field.key" :rules="field.rules">
-        <el-radio-group v-model="model[field.key]" :placeholder="field.placeholder" :disabled="field.disabled"
-          :style="{ width: field.width || '50%' }" @change="(e) => { handleRadioChange(e, field, index) }">
-          <el-radio v-for="option in field.options" :key="option.value" :label="option.value"
-            :disabled="option.disabled">
-            {{ option.label }}
-          </el-radio>
-        </el-radio-group>
-      </el-form-item>
+          <!-- 单选选择框 -->
+          <el-form-item v-if="field.type === 'radio'" :label="field.label" :prop="field.key" :rules="field.rules">
+            <el-radio-group v-model="model[field.key]" :placeholder="field.placeholder" :disabled="field.disabled"
+              :style="{ width: field.width || '100%' }" @change="(e) => { handleRadioChange(e, field, index) }">
+              <el-radio v-for="option in field.options" :key="option.value" :label="option.value"
+                :disabled="option.disabled">
+                {{ option.label }}
+              </el-radio>
+            </el-radio-group>
+          </el-form-item>
 
-      <!-- 下拉选择框 -->
-      <el-form-item v-else-if="field.type === 'select'" :label="field.label" :prop="field.key" :rules="field.rules">
-        <el-select v-model="model[field.key]" :placeholder="field.placeholder" :disabled="field.disabled"
-          :style="{ width: field.width || '50%' }" @change="(e) => { handleSelectChange(e, field, index) }"
-          :clearable="field.clearable !== false" :multiple="field.multiple" :filterable="field.filterable !== false">
-          <el-option v-for="option in field.options" :key="option.value" :label="option.label" :value="option.value" />
-        </el-select>
-      </el-form-item>
+          <!-- 下拉选择框 -->
+          <el-form-item v-if="field.type === 'select'" :label="field.label" :prop="field.key" :rules="field.rules">
+            <el-select v-model="model[field.key]" :placeholder="field.placeholder" :disabled="field.disabled"
+              :style="{ width: field.width || '100%' }" @change="(e) => { handleSelectChange(e, field, index) }"
+              :clearable="field.clearable !== false" :multiple="field.multiple"
+              :filterable="field.filterable !== false">
+              <el-option v-for="option in field.options" :key="option.value" :label="option.label"
+                :value="option.value" />
+            </el-select>
+          </el-form-item>
 
-      <!-- 日期选择器 -->
-      <el-form-item v-else-if="field.type === 'date'" :label="field.label" :prop="field.key" :rules="field.rules">
-        <el-date-picker v-model="model[field.key]" :type="field.dateType || 'date'" :placeholder="field.placeholder"
-          :disabled="field.disabled" :clearable="field.clearable !== false" :format="field.format"
-          :value-format="field.valueFormat" range-separator="至" :start-placeholder="field.startPlaceholder || '开始日期'"
-          :end-placeholder="field.endPlaceholder || '结束日期'" />
-      </el-form-item>
+          <!-- 日期选择器 -->
+          <el-form-item v-if="field.type === 'date'" :label="field.label" :prop="field.key" :rules="field.rules">
+            <el-date-picker v-model="model[field.key]" :type="field.dateType || 'date'" :placeholder="field.placeholder"
+              :disabled="field.disabled" :clearable="field.clearable !== false" :format="field.format"
+              :value-format="field.valueFormat" range-separator="至"
+              :start-placeholder="field.startPlaceholder || '开始日期'" :end-placeholder="field.endPlaceholder || '结束日期'" />
+          </el-form-item>
 
-      <!-- 复选框 -->
-      <el-form-item v-else-if="field.type === 'checkbox'" :label="field.label" :prop="field.key" :rules="field.rules">
-        <el-checkbox-group v-model="model[field.key]" :disabled="field.disabled">
-          <el-checkbox v-for="option in field.options" :key="option.value" :label="option.value">
-            {{ option.label }}
-          </el-checkbox>
-        </el-checkbox-group>
-      </el-form-item>
+          <!-- 复选框 -->
+          <el-form-item v-if="field.type === 'checkbox'" :label="field.label" :prop="field.key" :rules="field.rules">
+            <el-checkbox-group v-model="model[field.key]" :disabled="field.disabled">
+              <el-checkbox v-for="option in field.options" :key="option.value" :label="option.value">
+                {{ option.label }}
+              </el-checkbox>
+            </el-checkbox-group>
+          </el-form-item>
 
-      <!-- 单选框 -->
-      <el-form-item v-else-if="field.type === 'radio'" :label="field.label" :prop="field.key" :rules="field.rules">
-        <el-radio-group v-model="model[field.key]" :disabled="field.disabled">
-          <el-radio v-for="option in field.options" :key="option.value" :label="option.value">
-            {{ option.label }}
-          </el-radio>
-        </el-radio-group>
-      </el-form-item>
+          <!-- 文本域 -->
+          <el-form-item v-if="field.type === 'textarea'" :label="field.label" :prop="field.key" :rules="field.rules">
+            <el-input v-model="model[field.key]" type="textarea" :placeholder="field.placeholder"
+              :disabled="field.disabled" :style="{ width: field.width || '100%' }" :rows="field.rows || 3"
+              :maxlength="field.maxlength" :show-word-limit="field.showWordLimit" />
+          </el-form-item>
 
-      <!-- 文本域 -->
-      <el-form-item v-else-if="field.type === 'textarea'" :label="field.label" :prop="field.key" :rules="field.rules">
-        <el-input v-model="model[field.key]" type="textarea" :placeholder="field.placeholder" :disabled="field.disabled"
-          :style="{ width: field.width || '60%' }" :rows="field.rows || 3" :maxlength="field.maxlength"
-          :show-word-limit="field.showWordLimit" />
-      </el-form-item>
+          <!-- 上传文件 -->
+          <el-form-item v-if="field.type === 'upload'" :label="field.label" :prop="field.key" :rules="field.rules">
+            <el-upload :drag="field.drag" class="upload-demo"
+              :on-change="(file) => { handleFileChange(file, model, field.key) }"
+              :on-remove="(file, fileList) => { handleFileRemove(file, model, field.key) }" action="123"
+              :auto-upload="false" :before-remove="beforeRemove" multiple :limit="field.limit || 6"
+              :on-exceed="handleExceed" :file-list="model[field.key]">
+              <el-button v-if="!field.drag" size="small" type="primary" plain>点击上传</el-button>
+              <div v-if="!field.drag" slot="tip" class="el-upload__tip">上传附件，且不超过5M</div>
+              <i v-if="field.drag" class="el-icon-upload"></i>
+              <div v-if="field.drag" class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+            </el-upload>
+          </el-form-item>
 
-      <!-- 上传文件 -->
-      <el-form-item v-else-if="field.type === 'upload'" :label="field.label" :prop="field.key" :rules="field.rules">
-        <el-upload :drag="field.drag" class="upload-demo"
-          :on-change="(file) => { handleFileChange(file, model, field.key) }"
-          :on-remove="(file, fileList) => { handleFileRemove(file, model, field.key) }" action="123"
-          :auto-upload="false" :before-remove="beforeRemove" multiple :limit="field.limit || 6"
-          :on-exceed="handleExceed" :file-list="model[field.key]">
-          <el-button v-if="!field.drag" size="small" type="primary" plain>点击上传</el-button>
-          <div v-if="!field.drag" slot="tip" class="el-upload__tip">上传附件，且不超过5M</div>
-          <i v-if="field.drag" class="el-icon-upload"></i>
-          <div v-if="field.drag" class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
-        </el-upload>
-      </el-form-item>
-
-      <!-- 自定义插槽 -->
-      <el-form-item v-else-if="field.type === 'slot'" :label="field.label" :prop="field.key" :rules="field.rules">
-        <slot :name="field.key" :field="field" :form="model"></slot>
-      </el-form-item>
+          <!-- 自定义插槽 -->
+          <el-form-item v-if="field.type === 'slot'" :label="field.label" :prop="field.key" :rules="field.rules">
+            <slot :name="field.key" :field="field" :form="model"></slot>
+          </el-form-item>
+        </el-col>
+      </el-row>
     </template>
 
     <!-- 按钮区域 -->
