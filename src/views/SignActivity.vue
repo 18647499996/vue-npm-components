@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- 使用通用签名组件 -->
-    <base-electronic-signer mode="element" :content="contractContent" :file-name="fileName" download
+    <base-electronic-signer mode="element" :file-name="fileName" download
       @submit="onSignSubmit" :visible-date="true">
       <template #element>
         <div
@@ -82,10 +82,9 @@
 </template>
 
 <script>
-import BaseElectronicSignature from '../components/BaseElectronicSignature.vue';
-import BaseElectronicSigner from '../components/BaseElectronicSigner.vue';
+import BaseElectronicSigner from '../components/BaseElectronicSignerComponents.vue';
 export default {
-  components: { BaseElectronicSignature, BaseElectronicSigner },
+  components: { BaseElectronicSigner },
   data() {
     return {
       fileName: '解除劳动合同协议书',
