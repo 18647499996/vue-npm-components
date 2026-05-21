@@ -91,7 +91,6 @@ export default {
   },
   methods: {
     handleRangePickerChange(val) {
-      this.$emit('update:dateValue', val);
       this.$emit('handleRangePickerChange', val);
     },
 

@@ -41,7 +41,7 @@
       </template>
     </base-table-components>
     <el-row type="flex" style="justify-content: center;">
-      <base-dynamic-form-components style=" width: 80%; " :fields="formFields" :model="formModel" :rules="rules"
+      <base-dynamic-form-components ref="form" style=" width: 80%; " :fields="formFields" :model="formModel" :rules="rules"
         @submit="handleSubmit" @reset="handleReset" @validate-error="handleValidateError">
         <!-- 自定义插槽 -->
         <template #endDate="{ field, form }">
@@ -159,8 +159,8 @@ export default {
       ],
       value: '',
       formModel: {
-        projectLevel: '1',
-        dataType: 'systemB',
+        projectLevel: '',
+        dataType: '',
         startDate: '',
         endDate: '',
         ccyyf: '',
@@ -358,6 +358,9 @@ export default {
 
     handleSubmit(data) {
       console.log('提交表单：', data)
+      setTimeout(() => {
+        this.$refs.form.resetLoading()
+      }, 3000);
     },
 
     handleReset() {
