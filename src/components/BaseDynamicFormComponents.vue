@@ -227,8 +227,15 @@ export default {
      * @param {*} index 索引
      */
     handleSelectChange(e, field, index) {
-      const object = field.options.find(item => item.value == e)
-      this.$emit('handleSelectChange', e, field, object, index)
+      if (field.multiple) {
+        const objects = e.map(item => {
+          return field.options.find(opt => opt.value == item)
+        })
+        this.$emit('handleSelectChange', e, field, objects, index)
+      } else {
+        const object = field.options.find(item => item.value == e)
+        this.$emit('handleSelectChange', e, field, object, index)
+      }
     },
 
     /**
