@@ -75,7 +75,8 @@
           </el-form-item>
 
           <!-- 自定义插槽 -->
-          <el-form-item v-if="field.type === 'slot'" :label="field.label" :prop="field.key" :rules="field.rules">
+          <el-form-item v-if="field.type === 'slot'" :label="field.label" :prop="field.key" :rules="field.rules"
+            :required="field.required">
             <slot :name="field.key" :field="field" :form="model"></slot>
           </el-form-item>
         </el-col>
@@ -188,6 +189,10 @@ export default {
 
     resetLoading() {
       this.loading = false
+    },
+
+    reset() {
+      this.$refs.dynamicForm.resetFields()
     },
 
     // 表单验证
