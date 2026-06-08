@@ -15,7 +15,7 @@
           accept=".xls,.xlsx" :auto-upload="false" :limit="1">
           <el-button size="small" type="danger">导入</el-button>
         </el-upload>
-        
+
         <el-button size="medium" type="warning" icon="el-icon-download">自定义按钮</el-button>
 
         <el-button type="success" size="small">下载模板</el-button>
@@ -41,8 +41,9 @@
       </template>
     </base-table-components>
     <el-row type="flex" style="justify-content: center;">
-      <base-dynamic-form-components ref="form" style=" width: 80%; " :fields="formFields" :model="formModel" :rules="rules"
-        @submit="handleSubmit" @reset="handleReset" @validate-error="handleValidateError">
+      <base-dynamic-form-components ref="form" style=" width: 80%; " :fields="formFields" :model="formModel"
+        :rules="rules" @submit="handleSubmit" @reset="handleReset" @validate-error="handleValidateError"
+        @handleCascaderChange="handleCascaderChange">
         <!-- 自定义插槽 -->
         <template #endDate="{ field, form }">
           <el-date-picker v-model="form.startDate" type="date" placeholder="开始日期" value-format="yyyy-MM-dd"
@@ -187,6 +188,30 @@ export default {
           ]
         },
         {
+          type: 'cascader',
+          key: 'cascaderLevel',
+          label: '级联选择器',
+          placeholder: '请选择级联选择器',
+          required: true,
+          span: 12,
+          multiple: true,
+          showAllLevels: true,
+          collapseTags: true,
+          rules: [
+            { required: true, message: '请选择级联选择器', trigger: 'blur' },
+          ],
+          options: [
+            { name: '一级项目', id: '1', childList: [{ name: '一级项目1', id: '1-1' }, { name: '一级项目2', id: '1-2' }] },
+            { name: '二级项目', id: '2', childList: [{ name: '二级项目1', id: '2-1' }, { name: '二级项目2', id: '2-2' }] },
+            { name: '三级项目', id: '3', childList: [{ name: '三级项目1', id: '3-1' }, { name: '三级项目2', id: '3-2' }] }
+          ],
+          props: {
+            value: 'id',
+            label: 'name',
+            children: 'childList'
+          }
+        },
+        {
           type: 'radio',
           key: 'dataType',
           label: '数据类型',
@@ -305,6 +330,16 @@ export default {
         if (time.getTime() < start) return true
       }
       return false
+    },
+
+    /**
+     * 级联选择器change事件
+     * @param {*} e 选择数据
+     * @param {*} field 表单字段
+     * @param {*} index 索引
+     */
+    handleCascaderChange(e, field, index) {
+      console.log('级联选择器值变化：', e, field, index)
     },
 
     handleCurrentChange(currentPage) {

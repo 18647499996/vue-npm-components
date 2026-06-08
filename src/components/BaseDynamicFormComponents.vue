@@ -36,6 +36,21 @@
             </el-select>
           </el-form-item>
 
+          <!-- 级联选择器 -->
+          <el-form-item v-if="field.type === 'cascader'" :label="field.label" :prop="field.key" :rules="field.rules">
+            <el-cascader :options="field.options" v-model="model[field.key]" :props="{
+              value: field.props === undefined ? 'value' : field.props.value,
+              label: field.props === undefined ? 'label' : field.props.label,
+              children: field.props === undefined ? 'children' : field.props.children,
+              multiple: field.multiple
+            }" :style="{ width: field.width || '100%' }" :placeholder="field.placeholder"
+              :show-all-levels="field.showAllLevels !== false" :filterable="field.filterable !== false"
+              :disabled="field.disabled" :clearable="field.clearable !== false" :collapse-tags="field.collapseTags"
+              @change="(e) => { handleCascaderChange(e, field, index) }">
+            </el-cascader>
+          </el-form-item>
+
+
           <!-- 日期选择器 -->
           <el-form-item v-if="field.type === 'date'" :label="field.label" :prop="field.key" :rules="field.rules">
             <el-date-picker v-model="model[field.key]" :type="field.dateType || 'date'" :placeholder="field.placeholder"
@@ -241,6 +256,16 @@ export default {
         const object = field.options.find(item => item.value == e)
         this.$emit('handleSelectChange', e, field, object, index)
       }
+    },
+
+    /**
+     * 级联选择器change事件
+     * @param {*} e 选择数据
+     * @param {*} field 表单字段
+     * @param {*} index 索引
+     */
+    handleCascaderChange(e, field, index) {
+      this.$emit('handleCascaderChange', e, field, index)
     },
 
     /**
