@@ -55,7 +55,7 @@
           <el-form-item v-if="field.type === 'date'" :label="field.label" :prop="field.key" :rules="field.rules">
             <el-date-picker v-model="model[field.key]" :type="field.dateType || 'date'" :placeholder="field.placeholder"
               :disabled="field.disabled" :clearable="field.clearable !== false" :format="field.format"
-              :value-format="field.valueFormat" range-separator="至"
+              :value-format="field.valueFormat" range-separator="至" @change="(e) => { handleDateChange(e, field, index) }"
               :start-placeholder="field.startPlaceholder || '开始日期'" :end-placeholder="field.endPlaceholder || '结束日期'" />
           </el-form-item>
 
@@ -277,6 +277,16 @@ export default {
     handleRadioChange(e, field, index) {
       const object = field.options.find(item => item.value == e)
       this.$emit('handleRadioChange', e, field, object, index)
+    },
+
+    /**
+     * 日期选择器change事件
+     * @param {*} e 选择数据
+     * @param {*} field 表单字段
+     * @param {*} index 索引
+     */
+    handleDateChange(e, field, index) {
+      this.$emit('handleDateChange', e, field, index)
     },
 
     handleFileChange(file, dataModel, key) {

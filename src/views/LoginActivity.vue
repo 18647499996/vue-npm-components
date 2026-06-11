@@ -43,7 +43,7 @@
     <el-row type="flex" style="justify-content: center;">
       <base-dynamic-form-components ref="form" style=" width: 80%; " :fields="formFields" :model="formModel"
         :rules="rules" @submit="handleSubmit" @reset="handleReset" @validate-error="handleValidateError"
-        @handleCascaderChange="handleCascaderChange">
+        @handleCascaderChange="handleCascaderChange" @handleDateChange="handleDateChange">
         <!-- 自定义插槽 -->
         <template #endDate="{ field, form }">
           <el-date-picker v-model="form.startDate" type="date" placeholder="开始日期" value-format="yyyy-MM-dd"
@@ -232,7 +232,12 @@ export default {
           key: 'dataType',
           label: '时间范围',
           placeholder: '请选择时间范围',
-          dateType: 'daterange',
+          dateType: 'monthrange',
+          format: 'yyyy-MM',
+          valueFormat: 'yyyy-MM',
+          rangeSeparator: '至',
+          startPlaceholder: '开始日期',
+          endPlaceholder: '结束日期',
           required: true,
           rules: [
             { required: true, message: '请选择时间范围', trigger: 'blur' },
@@ -340,6 +345,15 @@ export default {
      */
     handleCascaderChange(e, field, index) {
       console.log('级联选择器值变化：', e, field, index)
+    },
+    /**
+     * 日期选择器change事件
+     * @param {*} e 选择数据
+     * @param {*} field 表单字段
+     * @param {*} index 索引
+     */
+    handleDateChange(e, field, index) {
+      console.log('日期选择器值变化：', e, field, index)
     },
 
     handleCurrentChange(currentPage) {
