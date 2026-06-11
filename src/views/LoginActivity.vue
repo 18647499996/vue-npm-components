@@ -177,7 +177,7 @@ export default {
           label: '项目级别',
           placeholder: '请选择项目级别',
           required: true,
-          span: 12,
+          span: 8,
           rules: [
             { required: true, message: '请选择项目级别', trigger: 'blur' },
           ],
@@ -193,7 +193,7 @@ export default {
           label: '级联选择器',
           placeholder: '请选择级联选择器',
           required: true,
-          span: 12,
+          span: 8,
           multiple: true,
           showAllLevels: true,
           collapseTags: true,
@@ -211,6 +211,24 @@ export default {
             children: 'childList'
           }
         },
+
+        {
+          type: 'date',
+          key: 'dataType',
+          label: '时间范围',
+          placeholder: '请选择时间范围',
+          dateType: 'monthrange',
+          span: 8,
+          format: 'yyyy-MM',
+          valueFormat: 'yyyy-MM',
+          rangeSeparator: '至',
+          startPlaceholder: '开始日期',
+          endPlaceholder: '结束日期',
+          required: true,
+          rules: [
+            { required: true, message: '请选择时间范围', trigger: 'blur' },
+          ],
+        },
         {
           type: 'radio',
           key: 'dataType',
@@ -226,22 +244,6 @@ export default {
             { label: '系统B', value: 'systemB' },
             { label: '系统C', value: 'systemC' }
           ]
-        },
-        {
-          type: 'date',
-          key: 'dataType',
-          label: '时间范围',
-          placeholder: '请选择时间范围',
-          dateType: 'monthrange',
-          format: 'yyyy-MM',
-          valueFormat: 'yyyy-MM',
-          rangeSeparator: '至',
-          startPlaceholder: '开始日期',
-          endPlaceholder: '结束日期',
-          required: true,
-          rules: [
-            { required: true, message: '请选择时间范围', trigger: 'blur' },
-          ],
         },
         {
           type: 'slot',

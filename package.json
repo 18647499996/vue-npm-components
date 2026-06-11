@@ -1,6 +1,6 @@
 {
   "name": "liudonghan-components",
-  "version": "1.3.5",
+  "version": "1.3.6",
   "description": "刘冬涵专用npm组件包",
   "author": "18647499996@sina.cn",
   "main": "src/components/index.js",
