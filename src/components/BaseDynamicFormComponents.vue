@@ -301,6 +301,7 @@ export default {
     handleFileChange(file, dataModel, key) {
       console.log('选择文件：', file);
       dataModel[key].push(file.raw)
+      this.$emit('handleFileChange', file, dataModel, key)
     },
 
     handleFileRemove(file, dataModel, key) {

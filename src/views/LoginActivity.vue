@@ -1,9 +1,10 @@
 <template>
   <div class="app-container">
-    <base-control-field-components picker-placeholder="请选择多个日期" picker="months" value-format="yyyy-MM" :export-loading="exportLoading"
-      :date-value="dataValue" :select-array="selectArray" :input="inputAttr" show-export-btn show-create-btn
-      @query="handleQuery" @create="handleCreate" @export="handleExport" @handleSelectChange="handleSelectFilterChange"
-      @handleInputChange="handleInputChange" @handleRangePickerChange="handleRangePickerChange" size="medium">
+    <base-control-field-components picker-placeholder="请选择多个日期" picker="months" value-format="yyyy-MM"
+      :export-loading="exportLoading" :date-value="dataValue" :select-array="selectArray" :input="inputAttr"
+      show-export-btn show-create-btn @query="handleQuery" @create="handleCreate" @export="handleExport"
+      @handleSelectChange="handleSelectFilterChange" @handleInputChange="handleInputChange"
+      @handleRangePickerChange="handleRangePickerChange" size="medium">
       <template #select>
         <el-select size="small" style="margin-right: 12px;" v-model="value" placeholder="请选择">
           <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
@@ -43,7 +44,8 @@
     <el-row type="flex" style="justify-content: center;">
       <base-dynamic-form-components ref="form" style=" width: 80%; " :fields="formFields" :model="formModel"
         :rules="rules" @submit="handleSubmit" @reset="handleReset" @validate-error="handleValidateError"
-        @handleCascaderChange="handleCascaderChange" @handleDateChange="handleDateChange">
+        @handleCascaderChange="handleCascaderChange" @handleDateChange="handleDateChange"
+        @handleFileChange="handleFileChange">
         <!-- 自定义插槽 -->
         <template #endDate="{ field, form }">
           <el-date-picker v-model="form.startDate" type="date" placeholder="开始日期" value-format="yyyy-MM-dd"
@@ -428,6 +430,9 @@ export default {
       console.log('文件上传', file)
     },
 
+    handleFileChange(file, dataModel, key) {
+      console.log('页面文件上传：', file);
+    },
 
     fetchData() {
       this.loading = true
