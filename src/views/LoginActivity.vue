@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <base-control-field-components picker-placeholder="请选择多个日期" picker="months" value-format="yyyy-MM"
+    <base-control-field-components picker-placeholder="请选择多个日期" picker="months" value-format="yyyy-MM" :export-loading="exportLoading"
       :date-value="dataValue" :select-array="selectArray" :input="inputAttr" show-export-btn show-create-btn
       @query="handleQuery" @create="handleCreate" @export="handleExport" @handleSelectChange="handleSelectFilterChange"
       @handleInputChange="handleInputChange" @handleRangePickerChange="handleRangePickerChange" size="medium">
@@ -68,6 +68,7 @@ export default {
   components: { BaseTableComponents, BaseControlFieldComponents, BaseDynamicFormComponents },
   data() {
     return {
+      exportLoading: false,
       dataValue: ['2026-01-01', '2026-02-01', '2026-03-01', '2026-04-01'],
       loading: false,
       currentPage: 1,
@@ -375,6 +376,7 @@ export default {
     },
 
     handleExport() {
+      this.exportLoading = true
       console.log('导出按钮')
     },
 

@@ -32,7 +32,7 @@
           {{ createBtnPlaceholder }}
         </el-button>
         <el-button :size="size" v-if="showExportBtn" type="warning" icon="el-icon-download"
-          @click="onClickListenerExport">导出</el-button>
+          @click="onClickListenerExport" :loading="exportLoading">导出</el-button>
         <slot name="button"></slot>
       </div>
     </el-row>
@@ -63,6 +63,7 @@ export default {
     showQueryBtn: { type: Boolean, default: true },
     showCreateBtn: { type: Boolean, default: false },
     showExportBtn: { type: Boolean, default: false },
+    exportLoading: { type: Boolean, default: false },
     createBtnPlaceholder: { type: String, default: '新增' },
     // 尺寸
     size: {
