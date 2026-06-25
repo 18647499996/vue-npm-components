@@ -56,6 +56,10 @@
             style="width: 150px;" :disabled="form.startDate == null" :picker-options="endDatePickerOptions">
           </el-date-picker>
         </template>
+        <!-- 按钮插槽 -->
+         <template #button>
+          <el-button type="primary" @click="handleSubmit">查询</el-button>
+         </template>
       </base-dynamic-form-components>
     </el-row>
   </div>
@@ -311,7 +315,7 @@ export default {
           rules: [
             { required: false, message: '请上传文件', trigger: 'blur' },
           ],
-          limit: 6,
+          limit: 2,
           options: []
         },
       ],

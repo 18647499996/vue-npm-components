@@ -90,7 +90,7 @@
               :on-change="(file) => { handleFileChange(file, model, field.key) }"
               :on-remove="(file, fileList) => { handleFileRemove(file, model, field.key) }" action="123"
               :auto-upload="false" :before-remove="beforeRemove" multiple :limit="field.limit || 6"
-              :on-exceed="handleExceed" :file-list="model[field.key]">
+              :on-exceed="(file, fileList) => { handleExceed(file, fileList, field) }" :file-list="model[field.key]">
               <el-button v-if="!field.drag" size="small" type="primary" plain>点击上传</el-button>
               <div v-if="!field.drag" slot="tip" class="el-upload__tip">上传附件，且不超过5M</div>
               <i v-if="field.drag" class="el-icon-upload"></i>
@@ -115,6 +115,7 @@
       <el-button v-if="showCancelBtn" type="danger" @click="handleCancel">
         {{ cancelBtnText }}
       </el-button>
+      <slot name="button"></slot>
       <el-button v-if="showSubmitBtn" type="primary" @click="handleSubmit" :loading="loading">
         {{ submitBtnText }}
       </el-button>
@@ -313,8 +314,8 @@ export default {
       return this.$confirm(`确定移除 ${file.name}？`);
     },
 
-    handleExceed(files, fileList) {
-      this.$message.warning(`当前限制选择 6 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
+    handleExceed(files, fileList, field) {
+      this.$message.warning(`当前限制选择 ${field.limit || 6} 个文件，本次选择了 ${files.length} 个文件，共选择了 ${fileList.length} 个文件`);
     },
 
     // 重置表单
